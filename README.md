@@ -1,8 +1,8 @@
 # OMP Model Routing Benchmark
 
-Task 1 closeout and Phase 1 roadmap for a bounded OMP × Pier/DeepSWE experiment on where to spend model intelligence in a coding-agent workflow: before implementation, at the mutation boundary, during implementation, after implementation, or on a stronger solo worker.
+Task 2 DS4 baseline closeout and Phase 1 roadmap for a bounded OMP × Pier/DeepSWE experiment on where to spend model intelligence in a coding-agent workflow: before implementation, at the mutation boundary, during implementation, after implementation, or on a stronger solo worker.
 
-**Status (2026-08-14):** Task 1 is officially complete after seven canonical routes. Phase 1 is in progress (`1/3`) and now follows a frozen complexity ladder: empirically Very Easy → Medium → Very Hard. Task 2 begins with a fresh DS4 solo baseline.
+**Status (2026-08-14):** Task 1 is complete. Task 2 DS4 solo is complete as a valid near-miss. Phase 1 is in progress (`2/3`) on the frozen Very Easy → Medium → Very Hard ladder. Remaining Task 2 routes are not authorized; Task 3 begins with a fresh DS4 solo baseline.
 
 ## Research question
 
@@ -37,25 +37,41 @@ K3 roles were recorded as `$0` by the gateway, so their comparison costs use the
 
 The detailed reviewed-run ledger, caveats, invalid-attempt classifications, accounting arithmetic, and harness lessons are in [`benchmark/FINDINGS.md`](benchmark/FINDINGS.md).
 
+## Task 2 aggregate outputs
+
+The Medium Task 2 DS4 solo baseline is `VALID`. It preserved the full `16715/16715` P2P suite, missed one F2P check (`78/79`), and therefore scored binary reward `0.0` with partial `0.9999404549`.
+
+| Route | Validation | Reward / F2P | Runtime | Comparison cost | Cost basis |
+|---|---|---:|---:|---:|---|
+| DS4 solo | `VALID` | `0.0` / `78/79` | 23m 28s | $0.0821 | recorded |
+
+Machine-readable values are in [`benchmark/results/task2-summary.json`](benchmark/results/task2-summary.json).
+
+## Task 2 findings
+
+1. **DS4 solo is a near-miss, not a ceiling.** Perfect P2P and `78/79` F2P still fail the binary reward. The remaining miss is one F2P check, so later Task 2 routes could in principle recover it, but they are not authorized.
+2. **The pre-run Medium label did not produce a DS4 struggle.** Wall time (`23m 28s`) and recorded cost (`$0.0821`) are comparable to Task 1 DS4 solo, so empirical difficulty remains low-to-moderate for this worker.
+3. **The next routing evidence is the Very Hard task, not more Task 2 spend.** Operator decision: skip remaining Task 2 routes and start Task 3 with DS4 solo.
+
 ## Phase 1 complexity ladder
 
 | Task | Target difficulty | Calibration | Status |
 |---|---|---|---|
 | Task 1 | Very Easy | Empirical: DS4 solo reached full measured quality in 25m 09s | Complete |
-| Task 2 | Medium | Pre-run structural review: broad behavior but localized implementation surface | Next |
-| Task 3 | Very Hard | Pre-run structural review: cross-layer implementation and integration surface | Queued |
+| Task 2 | Medium | Pre-run structural review: broad behavior but localized implementation surface | Complete (DS4 near-miss) |
+| Task 3 | Very Hard | Pre-run structural review: cross-layer implementation and integration surface | Next |
 
 “Very Easy” is a model-relative empirical label, not a claim that Task 1 is intrinsically trivial. Tasks 2 and 3 were selected before execution using instruction breadth, reference patch scope, subsystem coupling, state/algorithmic complexity, and regression surface. Their identities and fixtures remain private until each task closes to reduce benchmark contamination.
 
 ## Next run
 
-Task 1 is closed, but Phase 1 remains active. The next authorized benchmark run starts the Medium Task 2 with a fresh DS4 solo baseline:
+Task 2's DS4 baseline is closed. Remaining Task 2 routes stay registered but unauthorized. The next authorized benchmark run starts the Very Hard Task 3 with a fresh DS4 solo baseline:
 
 ```sh
-python3 benchmark/scripts/run_round1.py --run-one 2 ds4-solo
+python3 benchmark/scripts/run_round1.py --run-one 3 ds4-solo
 ```
 
-Run it only from a clean committed worktree after the focused tests and local readiness gate pass. Do not use `--force`. Review the new run contract, validation, result, logs, accounting, and both patch captures before authorizing another Task 2 condition.
+Run it only from a clean committed worktree after the focused tests and local readiness gate pass. Do not use `--force`. Review the new run contract, validation, result, logs, accounting, and both patch captures before authorizing another Task 3 condition.
 
 ## Repository map
 
@@ -65,6 +81,7 @@ Run it only from a clean committed worktree after the focused tests and local re
 - [`benchmark/scripts/`](benchmark/scripts/) — run, readiness, freeze, and validation tooling
 - [`benchmark/tests/`](benchmark/tests/) — focused harness regression tests
 - [`benchmark/SPECIAL_SAUCE.md`](benchmark/SPECIAL_SAUCE.md) — OMP feature-selection rationale
+- [`benchmark/results/task2-summary.json`](benchmark/results/task2-summary.json) — Task 2 DS4 baseline aggregates
 - [`ANNOUNCEMENTS.md`](ANNOUNCEMENTS.md) — ready-to-paste Discord and X drafts
 
 ## Safe-publication scope
@@ -76,8 +93,8 @@ This public snapshot contains the approach, orchestration code, focused tests, p
 - hidden verifier output and per-test failure details;
 - frozen DeepSWE task fixtures, solutions, and test patches;
 - the pinned OMP executable and local vendor checkouts;
-- exact Task 2/3 selector pins, unreleased task manifests, and future holdout identities.
+- exact Task 3 selector pins, unreleased task manifests, and future holdout identities.
 
-The published freeze utility retains the original seeded candidate-pool logic; the exact three-task slot mapping is enforced privately while future task identities are embargoed.
+The published freeze utility retains the original seeded candidate-pool logic; the exact remaining task-identity mapping is enforced privately while Task 3 and holdouts stay embargoed.
 
 Those exclusions prevent credential disclosure, hidden-test contamination, benchmark leakage, and redistribution of third-party binaries or task material. The public snapshot supports review of the method and aggregate evidence; exact replay requires separately authorized upstream checkouts, model access, and benchmark inputs.

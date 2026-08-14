@@ -1,7 +1,7 @@
 # OMP × Pier Benchmark — Canonical Experiment
 
-Status: **Task 1 officially complete; Phase 1 active (`1/3`); the Medium Task 2
-DS4 solo baseline is the next authorized run**.
+Status: **Task 2 DS4 baseline complete (near-miss); Phase 1 active (`2/3`); the
+Very Hard Task 3 DS4 solo baseline is the next authorized run**.
 
 ## 1. Decision we are trying to make
 
@@ -186,8 +186,8 @@ Phase 1 contains exactly three tasks:
    `25m 09s`. This is a model-relative outcome label, not a claim that the task
    is intrinsically trivial.
 2. **Task 2 — Medium (pre-run structural review):** broad behavior inside a
-   localized implementation surface. This replaces the previously queued broad
-   cross-subsystem task in the second slot.
+   localized implementation surface. DS4 solo is a valid near-miss: reward `0.0`,
+   F2P `78/79`, P2P `16715/16715`, `23m 28s`, `$0.0820814176` recorded.
 3. **Task 3 — Very Hard (pre-run structural review):** a broad cross-layer
    implementation with substantial integration and regression surface.
 
@@ -203,8 +203,8 @@ Each new task begins with DS4 solo. Review its contract, validation, aggregate
 quality, accounting, logs, and both patch captures before authorizing another
 condition. Task 1's ceiling result does not justify replaying every route on
 Tasks 2 and 3; spend only on routes that resolve a remaining routing decision.
-Task 3 remains blocked until Task 2's baseline and any authorized follow-ups are
-reviewed.
+Task 2's DS4 baseline is reviewed. Remaining Task 2 routes are registered but
+not authorized. The next authorized run is the Task 3 DS4 solo baseline.
 
 `plan_yolo_review` has a canonical Task 1 result. `prewalk_review` remains
 registered despite prewalk's failed Task 1 progression gate, but is not
@@ -298,11 +298,11 @@ condition, gate, or frozen decision changes; do not create parallel status files
 - Active scope is nine conditions: six DS4/K3 core routes, conditional
   `plan_yolo_review` and `prewalk_review` crosses, and one exploratory Luna
   advisor route. Luna solo, Sol, and `ultrathink` remain removed.
-- Task 1 is officially closed; Phase 1 is active at `1/3`. K3 solo and
-  `prewalk_review` remain registered for reuse but are retired unrun for Task 1.
-- Phase 1 is frozen as empirically Very Easy → Medium → Very Hard. The next
-  authorized run is the Medium Task 2 `ds4-solo` baseline. No other Task 2
-  condition and no Task 3 run is authorized until that baseline passes review.
+- Task 1 is officially closed; Task 2 DS4 solo is a reviewed near-miss; Phase 1
+  is active at `2/3`. Remaining Task 2 routes stay registered but unauthorized.
+- Phase 1 remains frozen as empirically Very Easy → Medium → Very Hard. The next
+  authorized run is the Very Hard Task 3 `ds4-solo` baseline. No other Task 3
+  condition is authorized until that baseline passes review.
 - Historical `benchmark/results/round1-baseline.json` remains a legacy reference,
   not a causal v4 baseline.
 
@@ -352,21 +352,20 @@ Repeatable command:
 
 ### Operator launch contract
 
-Task 1 is officially closed after seven canonical routes; Phase 1 remains active.
-The two unrun Task 1 conditions are retired and must not be backfilled. The next
-authorized run starts the preselected Medium Task 2 with a fresh DS4 solo
-baseline:
+Task 2's DS4 solo baseline is reviewed and closed as a valid near-miss. Remaining
+Task 2 routes stay registered but must not be launched. The next authorized run
+starts the preselected Very Hard Task 3 with a fresh DS4 solo baseline:
 
 ```sh
-python3 benchmark/scripts/run_round1.py --run-one 2 ds4-solo
+python3 benchmark/scripts/run_round1.py --run-one 3 ds4-solo
 ```
 
-Expected canonical job directory: `benchmark/runs/v4/v4-t02-ds4-solo/`. Never
+Expected canonical job directory: `benchmark/runs/v4/v4-t03-ds4-solo/`. Never
 use `--force`. Launch only from a clean committed worktree after the focused
 harness tests and repeatable local readiness gate pass. After the command exits,
 inspect `run-contract.json`, `validation.json`, `result.json`, Pier config/lock,
 every stage JSONL/stderr, accounting, and both patch captures before authorizing
-any additional Task 2 condition. Task 3 remains blocked until Task 2 review.
+any additional Task 3 condition.
 
 ### Change log
 
@@ -433,6 +432,10 @@ any additional Task 2 condition. Task 3 remains blocked until Task 2 review.
   K3 solo and prewalk plus review unrun for Task 1, froze Phase 1 as a three-task
   Very Easy → Medium → Very Hard ladder, and authorized only the Medium Task 2
   DS4 solo baseline as the next run.
+- 2026-08-14 — Reviewed Task 2 DS4 solo as a valid near-miss (`78/79` F2P,
+  `16715/16715` P2P, reward `0.0`, `23m 28s`, `$0.0820814176`). Left remaining
+  Task 2 routes unauthorized and authorized only the Very Hard Task 3 DS4 solo
+  baseline as the next run.
 
 ## 11. Review gate
 
