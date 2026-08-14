@@ -2,11 +2,11 @@
 
 Updated after every reviewed v4 run. This is the ongoing empirical record; `benchmark/EXPERIMENT.md` remains the experiment specification and decision ledger.
 
-> **Status (2026-08-14): official Task 3 DS4 baseline closeout; Phase 1 DS4
-> baselines complete (`3/3`).** Task 3 DS4 solo is a valid ceiling (`82/82` F2P,
-> `2/2` P2P). Remaining Task 2 and Task 3 routes stay registered but
-> unauthorized. The next evidence run is an operator-directed extremely-hard
-> DS4 solo probe (Task 4) from the unused holdout pool.
+> **Status (2026-08-14): official Task 4 DS4 baseline closeout.** Task 4 DS4
+> solo is a valid miss (`20/22` F2P, `58/58` P2P). This is the first DS4
+> struggle after the Phase 1 ceilings. Remaining Task 2, Task 3, and other
+> Task 4 routes stay registered but unauthorized. The next evidence run is
+> Task 4 controlled review.
 
 ## Recording rules
 
@@ -224,6 +224,20 @@ The official page states that 1M means 1,000,000 tokens and that prices exclude 
 - **Evidence:** one DS4 worker; empty stderr; no implementation subagents; no retries or exceptions; collected and independently captured final patches matched SHA-256 `a51ef23e25a7d7361df0489ac834158782775590d0b36cd46c1a84b8efa2f4f1`; worker stage totals reconcile exactly to top-level tokens and recorded cost. Worker tools were `read`, `grep`, `glob`, `edit`, `write`, and `bash`.
 - **Interpretation:** this is a ceiling, not a struggle. The pre-run Very Hard label produced a broader implementation surface, but DS4 still reached full measured quality at Task-1-like agent time and recorded cost.
 
+### Task 4 — DS4 solo
+
+- **Run:** `v4-t04-ds4-solo`
+- **Condition:** `ds4-solo`; treatment `solo`
+- **Commit:** `333f2654d4cb102c91dc06658bda5348928a6316`
+- **Validation:** `VALID`; no violations
+- **Models:** worker `deepseek/deepseek-v4-flash` with `thinking=max`
+- **Quality:** reward `0.0`; partial `0.975`; F2P `20/22`; P2P `58/58`
+- **Runtime:** `84m 31s` wall (`5,071s`); agent execution `80m 35s` (`4,835s`). Environment setup took about `3m 04s` and verification about `35s`.
+- **Tokens:** input including cache `96,855,104`; cache read `96,602,368`; uncached input `252,736`; output `262,914`
+- **Recorded workflow cost:** `$0.3794855904`
+- **Evidence:** one DS4 worker; empty stderr; no implementation subagents; no retries or exceptions; collected and independently captured final patches matched SHA-256 `738dfb6e7c009a96b90676e2161d57c9b05c200bb522a6c66c89bf60e55c6ef7`; worker stage totals reconcile exactly to top-level tokens and recorded cost. Worker tools were `read`, `grep`, `edit`, `write`, and `bash`.
+- **Interpretation:** this is a struggle, not a near-miss. Two F2P checks failed while the P2P suite stayed perfect. Agent time and recorded cost are several times the Phase 1 DS4 baselines, so the extreme probe discriminated DS4 on quality, latency, and cost.
+
 ## Infrastructure evidence
 
 ### Network isolation smoke
@@ -269,8 +283,9 @@ The official page states that 1M means 1,000,000 tokens and that prices exclude 
 11. **Task 2 DS4 solo is a valid near-miss:** reward `0.0`, F2P `78/79`, P2P `16715/16715`, partial `0.9999404549`, `23m 28s`, `$0.0820814176` recorded. The Medium structural label is retained; empirically DS4 still finished cheaply and quickly.
 12. **Task 3 DS4 solo is a valid ceiling:** reward `1.0`, F2P `82/82`, P2P `2/2`, `46m 56s` wall / `27m 00s` agent, `$0.0952155512` recorded. The Very Hard structural label is retained; empirically DS4 did not struggle. Remaining Task 3 routes cannot show quality uplift on this ceiling.
 13. **The original Very Hard slot did not discriminate DS4.** After that ceiling, remaining unused holdouts were re-ranked. Task 4 is the unused holdout with the strongest pre-run failure prediction: specialized runtime internals, cross-module coupling, and a byte-exact hidden oracle.
+14. **Task 4 DS4 solo is a valid struggle:** reward `0.0`, F2P `20/22`, P2P `58/58`, partial `0.975`, `84m 31s` wall / `80m 35s` agent, `$0.3794855904` recorded. The extreme label is retained and now has empirical support. This is the first DS4 quality gap that also cost and latency-discriminated.
 
-## Task 3 decision and Phase 1 continuation
+## Task 4 decision and continuation
 
 The Task 3 DS4 solo baseline is accepted as `VALID`. Remaining Task 3 routes stay registered but are not authorized: this is a ceiling result, so extra Task 3 spend cannot demonstrate quality uplift and would only repeat the Task 1 cost/latency lesson.
 
@@ -281,10 +296,13 @@ Phase 1 DS4 baselines are complete across the frozen Very Easy → Medium → Ve
 | 1 | Very Easy (empirical after completion) | Ceiling: `23/23` F2P in `25m 09s` for `$0.1047` |
 | 2 | Medium (structural) | Near-miss: `78/79` F2P in `23m 28s` for `$0.0821` |
 | 3 | Very Hard (structural) | Ceiling: `82/82` F2P in `46m 56s` wall / `27m 00s` agent for `$0.0952` |
+| 4 | Extreme (operator-directed after DS4 ceilings) | Struggle: `20/22` F2P in `84m 31s` wall / `80m 35s` agent for `$0.3795` |
 
 The original Phase 1 ladder is complete. DS4 reached full quality on both the empirical Very Easy task and the pre-run Very Hard task, and missed one F2P check on Medium. File count and cross-layer glue were not enough to produce a DS4 struggle.
 
-The next authorized evidence run is therefore not Task 2 review. It is Task 4 `ds4-solo`: an operator-directed extremely-hard probe selected from the unused holdout pool after the DS4 ceilings. The pick used the same structural criteria plus hidden-oracle exactness, and favored specialized runtime internals and a byte-exact hidden parser over another well-specified API/service feature. A DS4 fail is hypothesized, not guaranteed. Remaining Task 2 and Task 3 routes stay registered but unauthorized until that baseline is fully artifact-reviewed. Task identities stay private until the task closes.
+The Task 4 DS4 solo baseline is accepted as `VALID`. The hypothesized fail occurred: two F2P checks missed, agent time was `80m 35s`, and recorded cost was `$0.3795`. Remaining Task 4 routes other than controlled review stay registered but unauthorized. Remaining Task 2 and Task 3 routes stay deferred; Task 4 is now the larger and more expensive quality gap.
+
+The next authorized evidence run is Task 4 `ds4-k3-review-ds4`: a fresh DS4 implementation, independent K3 read-only review, and exactly one DS4 repair. That is the cheapest after-implementation recovery hypothesis on the first DS4 struggle. Task identities stay private until the task closes.
 
 The two canonical Task 1 advisor conditions remain `VALID_MODEL_TIMEOUT` with no result-based retry. `k3-solo` and `k3-prewalk-ds4-k3-review` remain retired unrun for Task 1 and are not part of the reported Task 1 evidence.
 

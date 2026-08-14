@@ -1,8 +1,8 @@
 # OMP Model Routing Benchmark
 
-Task 3 DS4 baseline closeout and Phase 1 roadmap for a bounded OMP × Pier/DeepSWE experiment on where to spend model intelligence in a coding-agent workflow: before implementation, at the mutation boundary, during implementation, after implementation, or on a stronger solo worker.
+Task 4 DS4 baseline closeout for a bounded OMP × Pier/DeepSWE experiment on where to spend model intelligence in a coding-agent workflow: before implementation, at the mutation boundary, during implementation, after implementation, or on a stronger solo worker.
 
-**Status (2026-08-14):** Task 1 is complete. Task 2 DS4 solo is a valid near-miss. Task 3 DS4 solo is a valid ceiling. Phase 1 DS4 baselines are complete (`3/3`) on the frozen Very Easy → Medium → Very Hard ladder. Remaining Task 2 and Task 3 routes are not authorized; the next run is an operator-directed extremely-hard DS4 solo probe (Task 4).
+**Status (2026-08-14):** Task 1 is complete. Task 2 DS4 solo is a valid near-miss. Task 3 DS4 solo is a valid ceiling. Task 4 DS4 solo is a valid miss (`20/22` F2P). Remaining Task 2, Task 3, and other Task 4 routes are not authorized; the next run is Task 4 controlled review.
 
 ## Research question
 
@@ -51,7 +51,7 @@ Machine-readable values are in [`benchmark/results/task2-summary.json`](benchmar
 
 1. **DS4 solo is a near-miss, not a ceiling.** Perfect P2P and `78/79` F2P still fail the binary reward. The remaining miss is one F2P check.
 2. **The pre-run Medium label did not produce a DS4 struggle.** Wall time (`23m 28s`) and recorded cost (`$0.0821`) are comparable to Task 1 DS4 solo, so empirical difficulty remains low-to-moderate for this worker.
-3. **Remaining Task 2 routes were deferred** until the Very Hard Task 3 DS4 baseline existed. That baseline is now a ceiling, so the Task 2 miss is again the only quality-gap left.
+3. **Remaining Task 2 routes stay deferred.** Task 4 is now the larger quality gap (`20/22` F2P, much higher cost and latency), so Task 2 review remains unauthorized.
 
 ## Task 3 aggregate outputs
 
@@ -67,7 +67,23 @@ Machine-readable values are in [`benchmark/results/task3-summary.json`](benchmar
 
 1. **DS4 solo is a ceiling, not a struggle.** Full F2P and P2P at `$0.0952` recorded cost. Agent time (`27m 00s`) is comparable to Task 1; wall time is longer because environment setup and verification took about `12m 31s` and `7m 09s`.
 2. **The pre-run Very Hard label did not produce a DS4 failure.** Broader implementation surface still yielded full measured quality, so remaining Task 3 routes cannot show quality uplift.
-3. **The original Very Hard slot did not discriminate DS4.** Remaining Task 3 routes stay unauthorized. The next spend is an extremely-hard DS4 probe from the unused holdout pool, not Task 2 review.
+3. **The original Very Hard slot did not discriminate DS4.** Remaining Task 3 routes stay unauthorized. Extra intelligence belongs on Task 4, where DS4 actually missed.
+
+## Task 4 aggregate outputs
+
+The extremely-hard Task 4 DS4 solo baseline is `VALID`. It preserved the full `58/58` P2P suite, missed two F2P checks (`20/22`), and therefore scored binary reward `0.0` with partial `0.975`.
+
+| Route | Validation | Reward / F2P | Runtime | Comparison cost | Cost basis |
+|---|---|---:|---:|---:|---|
+| DS4 solo | `VALID` | `0.0` / `20/22` | 84m 31s wall / 80m 35s agent | $0.3795 | recorded |
+
+Machine-readable values are in [`benchmark/results/task4-summary.json`](benchmark/results/task4-summary.json).
+
+## Task 4 findings
+
+1. **DS4 solo is a struggle, not a near-miss.** Perfect P2P and `20/22` F2P still fail the binary reward. Two F2P checks remain.
+2. **The extreme probe discriminated DS4.** Agent time (`80m 35s`) and recorded cost (`$0.3795`) are several times the Phase 1 DS4 baselines, unlike Tasks 1–3.
+3. **The next spend is Task 4 controlled review**, the cheapest after-implementation recovery hypothesis on the first DS4 struggle.
 
 ## Phase 1 complexity ladder
 
@@ -76,19 +92,19 @@ Machine-readable values are in [`benchmark/results/task3-summary.json`](benchmar
 | Task 1 | Very Easy | Empirical: DS4 solo reached full measured quality in 25m 09s | Complete |
 | Task 2 | Medium | Pre-run structural review: broad behavior but localized implementation surface | Complete (DS4 near-miss); review deferred |
 | Task 3 | Very Hard | Pre-run structural review: cross-layer implementation and integration surface | Complete (DS4 ceiling) |
-| Task 4 | Extreme | Operator-directed structural review after DS4 ceilings: specialized runtime internals plus a byte-exact hidden oracle | Next (DS4 solo) |
+| Task 4 | Extreme | Operator-directed structural review after DS4 ceilings: specialized runtime internals plus a byte-exact hidden oracle | Complete (DS4 miss); review next |
 
-“Very Easy” is a model-relative empirical label, not a claim that Task 1 is intrinsically trivial. Tasks 2 and 3 were selected before execution. Task 4 was selected later from unused holdouts after DS4 cleared the original Very Hard slot, using the same structural criteria plus hidden-oracle exactness. A DS4 fail is hypothesized, not guaranteed. Identities and fixtures remain private until each task closes to reduce benchmark contamination.
+“Very Easy” is a model-relative empirical label, not a claim that Task 1 is intrinsically trivial. Tasks 2 and 3 were selected before execution. Task 4 was selected later from unused holdouts after DS4 cleared the original Very Hard slot, using the same structural criteria plus hidden-oracle exactness. The hypothesized DS4 fail occurred. Identities and fixtures remain private until each task closes to reduce benchmark contamination.
 
 ## Next run
 
-Task 3's DS4 baseline is closed as a ceiling. Remaining Task 2 and Task 3 routes stay registered but unauthorized. The next authorized benchmark run points DS4 at the unused holdout with the strongest pre-run failure prediction:
+Task 4's DS4 baseline is closed as a valid miss. Remaining Task 2, Task 3, and other Task 4 routes stay registered but unauthorized. The next authorized benchmark run tests whether independent review can recover the two F2P misses:
 
 ```sh
-python3 benchmark/scripts/run_round1.py --run-one 4 ds4-solo
+python3 benchmark/scripts/run_round1.py --run-one 4 ds4-k3-review-ds4
 ```
 
-Run it only from a clean committed worktree after the focused tests and local readiness gate pass. Do not use `--force`. Review the new run contract, validation, result, logs, accounting, and both patch captures before authorizing another Task 4 condition.
+Run it only from a clean committed worktree after the focused tests and local readiness gate pass. Do not use `--force`. Review the new run contract, validation, result, logs, reviewer isolation, one repair, accounting, and both patch captures before authorizing another Task 4 condition.
 
 ## Repository map
 
@@ -100,6 +116,7 @@ Run it only from a clean committed worktree after the focused tests and local re
 - [`benchmark/SPECIAL_SAUCE.md`](benchmark/SPECIAL_SAUCE.md) — OMP feature-selection rationale
 - [`benchmark/results/task2-summary.json`](benchmark/results/task2-summary.json) — Task 2 DS4 baseline aggregates
 - [`benchmark/results/task3-summary.json`](benchmark/results/task3-summary.json) — Task 3 DS4 baseline aggregates
+- [`benchmark/results/task4-summary.json`](benchmark/results/task4-summary.json) — Task 4 DS4 baseline aggregates
 - [`ANNOUNCEMENTS.md`](ANNOUNCEMENTS.md) — ready-to-paste Discord and X drafts
 
 ## Safe-publication scope
