@@ -1,12 +1,18 @@
 {
   "schema_version": 1,
-  "status": "preliminary_task_1_closeout",
+  "status": "official_task_1_closeout_phase_1_in_progress",
   "published_at": "2026-08-14",
+  "closed_at": "2026-08-14",
   "protocol": "v4",
   "scope": {
-    "tasks": 1,
+    "phase": 1,
+    "phase_tasks_planned": 3,
+    "phase_tasks_complete": 1,
+    "task_index": 1,
+    "task_difficulty": "very_easy",
+    "difficulty_basis": "empirical_ds4_baseline",
     "canonical_routes": 7,
-    "statement": "Routing evidence from one coding task; not a universal model leaderboard or statistically powered comparison."
+    "statement": "Official Task 1 closeout within an active three-task Phase 1; routing evidence from one coding task, not a universal model leaderboard or statistically powered comparison."
   },
   "metrics": {
     "p2p": {"passed": 122, "total": 122, "applies_to": "all canonical routes"},

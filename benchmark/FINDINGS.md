@@ -2,10 +2,10 @@
 
 Updated after every reviewed v4 run. This is the ongoing empirical record; `benchmark/EXPERIMENT.md` remains the experiment specification and decision ledger.
 
-> **Status (2026-08-14): preliminary Task 1 closeout.** Seven canonical routes
-> have reviewed outcomes. The queued K3 solo and prewalk-plus-review conditions
-> were not run. These single-task results support routing hypotheses and harness
-> validation, not a universal model leaderboard.
+> **Status (2026-08-14): official Task 1 closeout; Phase 1 in progress (`1/3`).**
+> Seven Task 1 routes have reviewed outcomes. K3 solo and prewalk plus review
+> were retired unrun for Task 1. The next evidence run is a fresh DS4 solo
+> baseline on the preselected Medium Task 2.
 
 ## Recording rules
 
@@ -237,12 +237,12 @@ The official page states that 1M means 1,000,000 tokens and that prices exclude 
 9. **Harness lesson:** native advisor evidence and usage live below the worker session in `__advisor.jsonl`, not in the primary `worker.jsonl`. Validation and accounting must discover that transcript recursively while excluding it from primary-worker totals and adding it exactly once as advisor usage.
 10. **Timeout lesson:** an exact resource deadline can remain scientifically usable when the process group is stopped before snapshotting, partial role accounting reconciles, stderr is clean, and independently captured patches match. Instrumentation- and infrastructure-invalid attempts remain excluded.
 
-## Decision and closeout
+## Task 1 decision and Phase 1 continuation
 
 The two canonical advisor conditions are accepted as `VALID_MODEL_TIMEOUT`; neither receives a result-based retry. The K3 timeout occurred during native advisor drain after DS4 finished, whereas the Luna timeout occurred while DS4 was still active.
 
-The preliminary release closes after seven canonical Task 1 outcomes. The manifest still describes six DS4/K3 core routes, two conditional K3 crosses, and one exploratory Luna advisor route, but `k3-solo` and `k3-prewalk-ds4-k3-review` remain intentionally unrun and are not part of the reported evidence.
+Task 1 officially closes after seven canonical outcomes; Phase 1 remains active. The manifest still describes six DS4/K3 core routes, two conditional K3 crosses, and one exploratory Luna advisor route, but `k3-solo` and `k3-prewalk-ds4-k3-review` are retired unrun for Task 1 and are not part of the reported evidence.
 
 Advisor + review and plan/prewalk + advisor crosses remain excluded because live advising is already deadline-bound and those combinations blur role timing. OMP `orchestrate`, `workflowz`, native `/review`, loop, goal/guided-goal, CI-green, and Vibe remain excluded because they introduce fan-out, repeated attempts, persistence, or feedback-loop semantics.
 
-No additional v4 run is authorized by this closeout. Future work would need a new explicit launch decision. An extended-time or runtime-repaired advisor experiment requires a new diagnostic condition ID and remains non-comparable to v4; making that runtime change comparable requires a new protocol version and rerunning every Task 1 arm on the amended stack.
+Phase 1 now uses three complexity anchors: Task 1 is Very Easy by empirical DS4 baseline performance, Task 2 is Medium by pre-run structural review, and Task 3 is Very Hard by pre-run structural review. The next authorized evidence run is the fresh Task 2 `ds4-solo` baseline. No later Task 2 condition and no Task 3 run is authorized until that baseline passes full artifact review. An extended-time or runtime-repaired advisor experiment still requires a new diagnostic condition ID and remains non-comparable to v4; making that runtime change comparable requires a new protocol version and rerunning every arm on the amended stack.

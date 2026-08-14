@@ -1,7 +1,7 @@
 # OMP × Pier Benchmark — Canonical Experiment
 
-Status: **v4 preliminary Task 1 closeout; seven canonical outcomes audited;
-K3 solo and prewalk plus review remain intentionally unrun**.
+Status: **Task 1 officially complete; Phase 1 active (`1/3`); the Medium Task 2
+DS4 solo baseline is the next authorized run**.
 
 ## 1. Decision we are trying to make
 
@@ -169,48 +169,48 @@ Do not include in the initial benchmark:
   remote state; DeepSWE's hidden pristine verifier must remain post-hoc and must
   not become a feedback loop.
 
-## 7. Adaptive pilot — do not run a full factorial
+## 7. Adaptive three-task Phase 1 — do not run a full factorial
 
-### Phase 0 — harness validation
+### Task 1 route screen — complete
 
-Before meaningful spend, one task only:
+Task 1 exercised seven canonical routes and closed the harness/treatment screen.
+Every accepted run produced an auditable verifier result, stage-attributed usage,
+the expected model handoff or advisor/reviewer evidence, and no hidden-test
+feedback. K3 solo and prewalk plus review were retired unrun for Task 1.
 
-1. fresh v4 DS4 solo
-2. K3 plan-yolo → DS4
-3. K3 prewalk → DS4
-4. DS4 + K3 advisor
-5. DS4 → K3 review → DS4 repair
+### Frozen complexity ladder
 
-Gate: every run must produce a valid patch, verifier result, stage-attributed
-usage, correct model handoffs, and no hidden-test leakage.
+Phase 1 contains exactly three tasks:
 
-### Phase A — direct baselines
+1. **Task 1 — Very Easy (empirical):** DS4 solo reached full measured quality in
+   `25m 09s`. This is a model-relative outcome label, not a claim that the task
+   is intrinsically trivial.
+2. **Task 2 — Medium (pre-run structural review):** broad behavior inside a
+   localized implementation surface. This replaces the previously queued broad
+   cross-subsystem task in the second slot.
+3. **Task 3 — Very Hard (pre-run structural review):** a broad cross-layer
+   implementation with substantial integration and regression surface.
 
-On two frozen tasks:
+Tasks 2 and 3 were selected before execution using instruction breadth,
+reference patch files/hunks/churn, subsystem coupling, state and algorithmic
+complexity, integration depth, and regression surface. Exact identities are
+frozen in the private pilot manifest and withheld publicly until each task closes.
+The selector preserves the seeded, repository-diverse remainder as holdouts.
 
-- DS4 solo
-- K3 solo
+### Adaptive progression
 
-### Phase B — intervention timing with fixed K3 helper
+Each new task begins with DS4 solo. Review its contract, validation, aggregate
+quality, accounting, logs, and both patch captures before authorizing another
+condition. Task 1's ceiling result does not justify replaying every route on
+Tasks 2 and 3; spend only on routes that resolve a remaining routing decision.
+Task 3 remains blocked until Task 2's baseline and any authorized follow-ups are
+reviewed.
 
-On the two tasks, subject to adaptive stopping:
-
-- K3 plan-yolo → DS4
-- K3 prewalk → DS4
-- DS4 + K3 advisor
-- DS4 → K3 review → DS4 repair
-
-`plan_yolo_review` was authorized after controlled review completed cleanly and
-has a canonical task-1 result. `prewalk_review` was later registered at operator
-request as a conditional interaction check despite prewalk's failed task-1
-progression gate. Do not add advisor/review or planner/advisor crosses: the
-canonical advisors are deadline-bound, and native live advice during a K3
-planning/prewalk phase would blur role timing and causal attribution.
-
-### Phase C — finalists
-
-Repeat only finalists/ties to estimate stochastic stability. Compare the best
-augmented-DS4 route directly against K3 solo.
+`plan_yolo_review` has a canonical Task 1 result. `prewalk_review` remains
+registered despite prewalk's failed Task 1 progression gate, but is not
+automatically authorized on later tasks. Do not add advisor/review or
+planner/advisor crosses: canonical advisors are deadline-bound, and live advice
+during K3 planning/prewalk would blur role timing and causal attribution.
 
 ## 8. Metrics
 
@@ -298,30 +298,35 @@ condition, gate, or frozen decision changes; do not create parallel status files
 - Active scope is nine conditions: six DS4/K3 core routes, conditional
   `plan_yolo_review` and `prewalk_review` crosses, and one exploratory Luna
   advisor route. Luna solo, Sol, and `ultrathink` remain removed.
-- The next unresolved task-1 condition is `k3-solo`; `prewalk_review` remains
-  queued behind its validation.
+- Task 1 is officially closed; Phase 1 is active at `1/3`. K3 solo and
+  `prewalk_review` remain registered for reuse but are retired unrun for Task 1.
+- Phase 1 is frozen as empirically Very Easy → Medium → Very Hard. The next
+  authorized run is the Medium Task 2 `ds4-solo` baseline. No other Task 2
+  condition and no Task 3 run is authorized until that baseline passes review.
 - Historical `benchmark/results/round1-baseline.json` remains a legacy reference,
   not a causal v4 baseline.
 
 ### Frozen decisions
 
-1. No implementation subagents or second implementation worker.
-2. Every model role and handoff uses `thinking=max`.
-3. `plan_yolo` and `prewalk` remain separate mutation-boundary hypotheses.
-4. Review is an independent read-only process followed by exactly one fresh DS4
+1. Phase 1 contains exactly three tasks in the frozen Very Easy → Medium → Very
+   Hard order; future task identities remain private until their task closes.
+2. No implementation subagents or second implementation worker.
+3. Every model role and handoff uses `thinking=max`.
+4. `plan_yolo` and `prewalk` remain separate mutation-boundary hypotheses.
+5. Review is an independent read-only process followed by exactly one fresh DS4
    repair process; no native `/review`.
-5. Hidden verifier results are post-hoc only.
-6. `plan_yolo_review` was authorized only after controlled review completed
-   validly; its task-1 result does not justify an advisor cross.
-7. `prewalk_review` is registered at operator request as a conditional
+6. Hidden verifier results are post-hoc only.
+7. `plan_yolo_review` was authorized only after controlled review completed
+   validly; its Task 1 result does not justify an advisor cross.
+8. `prewalk_review` is registered at operator request as a conditional
    interaction check despite prewalk failing its original progression gate.
-8. Advisor/review and planner/advisor crosses are not registered because the
+9. Advisor/review and planner/advisor crosses are not registered because the
    advisors are deadline-bound and those combinations blur timing attribution.
-9. New conditions must receive a unique condition ID, state one unresolved
-   routing decision, declare a phase, and pass constructor/manifest validation
-   before becoming runnable.
-10. The canonical advisor outcomes receive no result-based retries.
-11. Do not raise the timeout or alter advisor prompt, tools, synchronization,
+10. New conditions must receive a unique condition ID, state one unresolved
+    routing decision, declare a phase, and pass constructor/manifest validation
+    before becoming runnable.
+11. The canonical advisor outcomes receive no result-based retries.
+12. Do not raise the timeout or alter advisor prompt, tools, synchronization,
     immunity, thinking, or model under an existing condition ID. Any such run is
     a separately named, non-comparable diagnostic.
 
@@ -347,11 +352,21 @@ Repeatable command:
 
 ### Operator launch contract
 
-The preliminary Task 1 release is closed after seven canonical routes. No
-additional v4 benchmark command is authorized by this closeout. `k3-solo` and
-`k3-prewalk-ds4-k3-review` remain registered but intentionally unrun. Any future
-launch requires a new explicit operator decision, a clean committed worktree,
-the focused harness tests, and the repeatable local readiness gate.
+Task 1 is officially closed after seven canonical routes; Phase 1 remains active.
+The two unrun Task 1 conditions are retired and must not be backfilled. The next
+authorized run starts the preselected Medium Task 2 with a fresh DS4 solo
+baseline:
+
+```sh
+python3 benchmark/scripts/run_round1.py --run-one 2 ds4-solo
+```
+
+Expected canonical job directory: `benchmark/runs/v4/v4-t02-ds4-solo/`. Never
+use `--force`. Launch only from a clean committed worktree after the focused
+harness tests and repeatable local readiness gate pass. After the command exits,
+inspect `run-contract.json`, `validation.json`, `result.json`, Pier config/lock,
+every stage JSONL/stderr, accounting, and both patch captures before authorizing
+any additional Task 2 condition. Task 3 remains blocked until Task 2 review.
 
 ### Change log
 
@@ -414,9 +429,10 @@ the focused harness tests, and the repeatable local readiness gate.
   quality result changed.
 - 2026-08-13 — Registered conditional `prewalk_review` at operator request and
   retained `k3-solo` as the next authorized task-1 run.
-- 2026-08-14 — Closed the preliminary public Task 1 release after seven
-  canonical routes. K3 solo and prewalk plus review remain unrun; no further v4
-  spend is authorized by this closeout.
+- 2026-08-14 — Officially closed Task 1 after seven canonical routes. Retired
+  K3 solo and prewalk plus review unrun for Task 1, froze Phase 1 as a three-task
+  Very Easy → Medium → Very Hard ladder, and authorized only the Medium Task 2
+  DS4 solo baseline as the next run.
 
 ## 11. Review gate
 
