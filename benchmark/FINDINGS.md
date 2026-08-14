@@ -2,10 +2,11 @@
 
 Updated after every reviewed v4 run. This is the ongoing empirical record; `benchmark/EXPERIMENT.md` remains the experiment specification and decision ledger.
 
-> **Status (2026-08-14): official Task 2 DS4 baseline closeout; Phase 1 in progress (`2/3`).**
-> Task 2 DS4 solo is a valid near-miss (`78/79` F2P, `16715/16715` P2P). Remaining
-> Task 2 routes are registered but unauthorized. The next evidence run is a
-> fresh DS4 solo baseline on the preselected Very Hard Task 3.
+> **Status (2026-08-14): official Task 3 DS4 baseline closeout; Phase 1 DS4
+> baselines complete (`3/3`).** Task 3 DS4 solo is a valid ceiling (`82/82` F2P,
+> `2/2` P2P). Remaining Task 3 routes stay registered but unauthorized. The next
+> evidence run returns to Task 2 controlled review to test recovery of the only
+> remaining quality gap (`78/79` F2P).
 
 ## Recording rules
 
@@ -209,6 +210,20 @@ The official page states that 1M means 1,000,000 tokens and that prices exclude 
 - **Evidence:** one DS4 worker; empty stderr; no implementation subagents; no retries or exceptions; collected and independently captured final patches matched SHA-256 `605b35fab7b9a35a415074917fecaa59a87f892e31db16f8720d13d2d3fb407a`; worker stage totals reconcile exactly to top-level tokens and recorded cost.
 - **Interpretation:** this is a near-miss rather than a ceiling. Binary reward fails on a single F2P check while the P2P suite is perfect. Empirical cost and latency remain comparable to Task 1 DS4 solo, so the pre-run Medium label did not produce a DS4 struggle.
 
+### Task 3 — DS4 solo
+
+- **Run:** `v4-t03-ds4-solo`
+- **Condition:** `ds4-solo`; treatment `solo`
+- **Commit:** `96d04ff8e5ec1c7226fcd54a25679f59d69a2ef8`
+- **Validation:** `VALID`; no violations
+- **Models:** worker `deepseek/deepseek-v4-flash` with `thinking=max`
+- **Quality:** reward `1.0`; partial `1.0`; F2P `82/82`; P2P `2/2`
+- **Runtime:** `46m 56s` wall (`2,816s`); agent execution `27m 00s` (`1,620s`). Environment setup took about `12m 31s` and verification about `7m 09s`.
+- **Tokens:** input including cache `19,379,727`; cache read `19,253,504`; uncached input `126,223`; output `84,409`
+- **Recorded workflow cost:** `$0.0952155512`
+- **Evidence:** one DS4 worker; empty stderr; no implementation subagents; no retries or exceptions; collected and independently captured final patches matched SHA-256 `a51ef23e25a7d7361df0489ac834158782775590d0b36cd46c1a84b8efa2f4f1`; worker stage totals reconcile exactly to top-level tokens and recorded cost. Worker tools were `read`, `grep`, `glob`, `edit`, `write`, and `bash`.
+- **Interpretation:** this is a ceiling, not a struggle. The pre-run Very Hard label produced a broader implementation surface, but DS4 still reached full measured quality at Task-1-like agent time and recorded cost.
+
 ## Infrastructure evidence
 
 ### Network isolation smoke
@@ -252,13 +267,24 @@ The official page states that 1M means 1,000,000 tokens and that prices exclude 
 10. **Timeout lesson:** an exact resource deadline can remain scientifically usable when the process group is stopped before snapshotting, partial role accounting reconciles, stderr is clean, and independently captured patches match. Instrumentation- and infrastructure-invalid attempts remain excluded.
 
 11. **Task 2 DS4 solo is a valid near-miss:** reward `0.0`, F2P `78/79`, P2P `16715/16715`, partial `0.9999404549`, `23m 28s`, `$0.0820814176` recorded. The Medium structural label is retained; empirically DS4 still finished cheaply and quickly.
+12. **Task 3 DS4 solo is a valid ceiling:** reward `1.0`, F2P `82/82`, P2P `2/2`, `46m 56s` wall / `27m 00s` agent, `$0.0952155512` recorded. The Very Hard structural label is retained; empirically DS4 did not struggle. Remaining Task 3 routes cannot show quality uplift on this ceiling.
 
-## Task 2 decision and Phase 1 continuation
+## Task 3 decision and Phase 1 continuation
 
-The Task 2 DS4 solo baseline is accepted as `VALID`. Remaining Task 2 routes stay registered but are not authorized: the operator decision is to spend the next run on the Very Hard task rather than chase the one remaining Task 2 F2P miss.
+The Task 3 DS4 solo baseline is accepted as `VALID`. Remaining Task 3 routes stay registered but are not authorized: this is a ceiling result, so extra Task 3 spend cannot demonstrate quality uplift and would only repeat the Task 1 cost/latency lesson.
+
+Phase 1 DS4 baselines are complete across the frozen Very Easy → Medium → Very Hard ladder:
+
+| Task | Pre-run label | DS4 solo outcome |
+|---|---|---|
+| 1 | Very Easy (empirical after completion) | Ceiling: `23/23` F2P in `25m 09s` for `$0.1047` |
+| 2 | Medium (structural) | Near-miss: `78/79` F2P in `23m 28s` for `$0.0821` |
+| 3 | Very Hard (structural) | Ceiling: `82/82` F2P in `46m 56s` wall / `27m 00s` agent for `$0.0952` |
+
+The only remaining Phase 1 quality gap is Task 2's one F2P miss. The next authorized evidence run is Task 2 `ds4-k3-review-ds4`: a fresh DS4 implementation, independent K3 read-only review, and exactly one DS4 repair. That is the cheapest after-implementation recovery hypothesis. Other Task 2 routes stay registered but unauthorized until that review is fully artifact-reviewed.
 
 The two canonical Task 1 advisor conditions remain `VALID_MODEL_TIMEOUT` with no result-based retry. `k3-solo` and `k3-prewalk-ds4-k3-review` remain retired unrun for Task 1 and are not part of the reported Task 1 evidence.
 
 Advisor + review and plan/prewalk + advisor crosses remain excluded because live advising is already deadline-bound and those combinations blur role timing. OMP `orchestrate`, `workflowz`, native `/review`, loop, goal/guided-goal, CI-green, and Vibe remain excluded because they introduce fan-out, repeated attempts, persistence, or feedback-loop semantics.
 
-Phase 1 remains a three-task ladder: Task 1 Very Easy by empirical DS4 baseline, Task 2 Medium by pre-run structural review with an empirical DS4 near-miss, and Task 3 Very Hard by pre-run structural review. The next authorized evidence run is the fresh Task 3 `ds4-solo` baseline. No later Task 3 condition is authorized until that baseline passes full artifact review. An extended-time or runtime-repaired advisor experiment still requires a new diagnostic condition ID and remains non-comparable to v4.
+An extended-time or runtime-repaired advisor experiment still requires a new diagnostic condition ID and remains non-comparable to v4.

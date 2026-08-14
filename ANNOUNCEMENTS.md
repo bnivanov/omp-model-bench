@@ -3,18 +3,19 @@
 ## Discord
 
 ```text
-Task 2 of my three-task OMP model-routing benchmark is complete on the DS4 solo baseline. Phase 1 is now `2/3` on a frozen Very Easy → Medium → Very Hard ladder.
+Phase 1 DS4 baselines of my three-task OMP model-routing benchmark are complete (`3/3`) on a frozen Very Easy → Medium → Very Hard ladder.
 
-Task 2 DS4 solo:
+Task 3 DS4 solo (Very Hard):
 - validation VALID
-- reward 0.0
-- F2P 78/79
-- P2P 16715/16715
-- partial 0.9999404549
-- 23m 28s
-- $0.0821 recorded
+- reward 1.0
+- F2P 82/82
+- P2P 2/2
+- 46m 56s wall / 27m 00s agent
+- $0.0952 recorded
 
-This is a near-miss, not a ceiling: one F2P check failed, while the full P2P suite passed. Empirical DS4 cost and latency stayed comparable to the Very Easy Task 1 baseline, so the pre-run Medium label did not produce a DS4 struggle. Remaining Task 2 routes are registered but not authorized. The next run is Very Hard Task 3 DS4 solo.
+This is a ceiling, not a struggle. Agent time stayed comparable to Task 1; wall time was longer because environment setup and verification took about 12m and 7m. Remaining Task 3 routes are registered but not authorized, because extra spend cannot show quality uplift on a ceiling task.
+
+The only remaining Phase 1 quality gap is Task 2's 78/79 F2P near-miss. Next run: Task 2 controlled review (DS4 implement → K3 read-only review → one DS4 repair).
 
 Task identities and fixtures stay private until each task closes.
 
@@ -24,8 +25,8 @@ https://github.com/bnivanov/omp-model-bench
 
 ## X
 
-223 characters:
+216 characters:
 
 ```text
-Task 2 of my 3-task OMP routing benchmark: DS4 solo hit 78/79 F2P + 16715/16715 P2P in 23m for $0.082. Near-miss, not a ceiling. Phase 1 is 2/3; Very Hard Task 3 DS4 solo is next. https://github.com/bnivanov/omp-model-bench
+Phase 1 DS4 baselines are done (3/3). Very Hard Task 3: DS4 solo hit 82/82 F2P + 2/2 P2P in 47m for $0.095. Ceiling, not a struggle. Next: Task 2 review for the 78/79 miss. https://github.com/bnivanov/omp-model-bench
 ```

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "status": "official_task_3_ds4_baseline_closeout_phase_1_ds4_baselines_complete",
+  "published_at": "2026-08-14",
+  "closed_at": "2026-08-14",
+  "protocol": "v4",
+  "scope": {
+    "phase": 1,
+    "phase_tasks_planned": 3,
+    "phase_tasks_complete": 3,
+    "ds4_baselines_complete": 3,
+    "task_index": 3,
+    "task_difficulty": "very_hard",
+    "difficulty_basis": "pre_run_structural_review",
+    "canonical_routes": 1,
+    "statement": "Official Task 3 DS4 solo baseline closeout; Phase 1 DS4 baselines complete across Very Easy, Medium, and Very Hard. Ceiling routing evidence from one coding task, not a universal model leaderboard or statistically powered comparison."
+  },
+  "operator_decision": {
+    "remaining_task_3_routes": "registered_but_unauthorized",
+    "reason": "ceiling_result_no_quality_uplift_possible",
+    "next_authorized_run": {
+      "task_index": 2,
+      "condition_id": "ds4-k3-review-ds4",
+      "command": "python3 benchmark/scripts/run_round1.py --run-one 2 ds4-k3-review-ds4"
+    }
+  },
+  "routes": [
+    {
+      "condition": "ds4-solo",
+      "treatment": "solo",
+      "models": {
+        "worker": "deepseek/deepseek-v4-flash"
+      },
+      "thinking": "max",
+      "validation": "VALID",
+      "reward": 1.0,
+      "partial": 1.0,
+      "f2p": {
+        "passed": 82,
+        "total": 82
+      },
+      "p2p": {
+        "passed": 2,
+        "total": 2
+      },
+      "runtime_seconds": 2816,
+      "agent_execution_seconds": 1620,
+      "environment_setup_seconds": 751,
+      "verifier_seconds": 429,
+      "recorded_workflow_cost_usd": 0.0952155512,
+      "inferred_helper_cost_usd": 0.0,
+      "comparison_cost_usd": 0.0952155512,
+      "comparison_cost_basis": "recorded",
+      "tokens": {
+        "input_including_cache": 19379727,
+        "cache_read": 19253504,
+        "uncached_input": 126223,
+        "output": 84409
+      }
+    }
+  ]
+}

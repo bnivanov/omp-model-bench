@@ -1,7 +1,7 @@
 # OMP × Pier Benchmark — Canonical Experiment
 
-Status: **Task 2 DS4 baseline complete (near-miss); Phase 1 active (`2/3`); the
-Very Hard Task 3 DS4 solo baseline is the next authorized run**.
+Status: **Task 3 DS4 baseline complete (ceiling); Phase 1 DS4 baselines
+complete (`3/3`); Task 2 controlled review is the next authorized run**.
 
 ## 1. Decision we are trying to make
 
@@ -298,11 +298,13 @@ condition, gate, or frozen decision changes; do not create parallel status files
 - Active scope is nine conditions: six DS4/K3 core routes, conditional
   `plan_yolo_review` and `prewalk_review` crosses, and one exploratory Luna
   advisor route. Luna solo, Sol, and `ultrathink` remain removed.
-- Task 1 is officially closed; Task 2 DS4 solo is a reviewed near-miss; Phase 1
-  is active at `2/3`. Remaining Task 2 routes stay registered but unauthorized.
+- Task 1 is officially closed; Task 2 DS4 solo is a reviewed near-miss; Task 3
+  DS4 solo is a reviewed ceiling; Phase 1 DS4 baselines are complete at `3/3`.
+  Remaining Task 3 routes stay registered but unauthorized.
 - Phase 1 remains frozen as empirically Very Easy → Medium → Very Hard. The next
-  authorized run is the Very Hard Task 3 `ds4-solo` baseline. No other Task 3
-  condition is authorized until that baseline passes review.
+  authorized run is Task 2 `ds4-k3-review-ds4` to test recovery of the only
+  remaining quality gap. No other Task 2 or Task 3 condition is authorized until
+  that review passes artifact review.
 - Historical `benchmark/results/round1-baseline.json` remains a legacy reference,
   not a causal v4 baseline.
 
@@ -352,20 +354,21 @@ Repeatable command:
 
 ### Operator launch contract
 
-Task 2's DS4 solo baseline is reviewed and closed as a valid near-miss. Remaining
-Task 2 routes stay registered but must not be launched. The next authorized run
-starts the preselected Very Hard Task 3 with a fresh DS4 solo baseline:
+Task 3's DS4 solo baseline is reviewed and closed as a valid ceiling. Remaining
+Task 3 routes stay registered but must not be launched. Phase 1 DS4 baselines
+are complete. The next authorized run returns to the Task 2 quality gap with
+controlled review:
 
 ```sh
-python3 benchmark/scripts/run_round1.py --run-one 3 ds4-solo
+python3 benchmark/scripts/run_round1.py --run-one 2 ds4-k3-review-ds4
 ```
 
-Expected canonical job directory: `benchmark/runs/v4/v4-t03-ds4-solo/`. Never
-use `--force`. Launch only from a clean committed worktree after the focused
-harness tests and repeatable local readiness gate pass. After the command exits,
-inspect `run-contract.json`, `validation.json`, `result.json`, Pier config/lock,
-every stage JSONL/stderr, accounting, and both patch captures before authorizing
-any additional Task 3 condition.
+Expected canonical job directory: `benchmark/runs/v4/v4-t02-ds4-k3-review-ds4/`.
+Never use `--force`. Launch only from a clean committed worktree after the
+focused harness tests and repeatable local readiness gate pass. After the
+command exits, inspect `run-contract.json`, `validation.json`, `result.json`,
+Pier config/lock, every stage JSONL/stderr, accounting, and both patch captures
+before authorizing any additional Task 2 condition.
 
 ### Change log
 
@@ -436,6 +439,10 @@ any additional Task 3 condition.
   `16715/16715` P2P, reward `0.0`, `23m 28s`, `$0.0820814176`). Left remaining
   Task 2 routes unauthorized and authorized only the Very Hard Task 3 DS4 solo
   baseline as the next run.
+- 2026-08-14 — Reviewed Task 3 DS4 solo as a valid ceiling (`82/82` F2P, `2/2`
+  P2P, reward `1.0`, `46m 56s` wall / `27m 00s` agent, `$0.0952155512`). Left
+  remaining Task 3 routes unauthorized and authorized Task 2 controlled review
+  as the next run to test recovery of the only remaining quality gap.
 
 ## 11. Review gate
 
