@@ -1,7 +1,7 @@
 # OMP × Pier Benchmark — Canonical Experiment
 
-Status: **Task 4 DS4 baseline complete (valid miss); Task 4 controlled review
-is the next authorized run**.
+Status: **Task 4 review complete (valid regression, 19/22 vs 20/22 solo);
+Task 4 K3 solo is the next authorized run**.
 
 ## 1. Decision we are trying to make
 
@@ -357,22 +357,23 @@ Repeatable command:
 
 ### Operator launch contract
 
-Task 4's DS4 solo baseline is reviewed and closed as a valid miss. Remaining
-Task 2, Task 3, and other Task 4 routes stay registered but must not be
-launched. The next authorized run tests whether independent review can recover
-the first DS4 struggle:
+Task 4's controlled review is reviewed and closed as a valid regression
+(`19/22` F2P vs `20/22` solo; `$1.5123777312` comparison vs `$0.3794855904`
+recorded). Review plus one repair did not recover the first DS4 struggle.
+Remaining Task 2, Task 3, and other Task 4 routes stay registered but must not
+be launched. The next authorized run tests whether the miss is DS4-specific or
+model-hard with a stronger solo worker:
 
 ```sh
-python3 benchmark/scripts/run_round1.py --run-one 4 ds4-k3-review-ds4
+python3 benchmark/scripts/run_round1.py --run-one 4 k3-solo
 ```
 
-Expected canonical job directory: `benchmark/runs/v4/v4-t04-ds4-k3-review-ds4/`.
-Never use `--force`. Launch only from a clean committed worktree after the
-focused harness tests and repeatable local readiness gate pass. After the
-command exits, inspect `run-contract.json`, `validation.json`, `result.json`,
-Pier config/lock, every stage JSONL/stderr, reviewer isolation, one repair,
-accounting, and both patch captures before authorizing any additional Task 4
-condition.
+Expected canonical job directory: `benchmark/runs/v4/v4-t04-k3-solo/`. Never
+use `--force`. Launch only from a clean committed worktree after the focused
+harness tests and repeatable local readiness gate pass. After the command
+exits, inspect `run-contract.json`, `validation.json`, `result.json`, Pier
+config/lock, every stage JSONL/stderr, accounting, and both patch captures
+before authorizing any additional Task 4 condition.
 
 ### Change log
 
@@ -456,6 +457,11 @@ condition.
   remaining Task 2, Task 3, and other Task 4 routes unauthorized and authorized
   Task 4 controlled review as the next run to test recovery of the first DS4
   struggle.
+- 2026-08-14 — Reviewed Task 4 controlled review as a valid regression (`19/22`
+  F2P vs solo `20/22`, partial `0.9625`, `89m 12s` wall, `$0.3453783312`
+  recorded / `$1.5123777312` inferred comparison). Review plus one repair did
+  not recover the miss. Authorized Task 4 `k3-solo` as the next run to test
+  whether the failure is DS4-specific or model-hard.
 
 ## 11. Review gate
 

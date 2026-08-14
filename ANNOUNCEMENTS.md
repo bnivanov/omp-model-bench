@@ -3,24 +3,28 @@
 ## Discord
 
 ```text
-Task 4 discriminated DS4. After three Phase 1 ceilings/near-misses, the extremely-hard probe is the first real struggle.
+Task 4 controlled review is done, and it made things worse.
 
-- Task 1 Very Easy: 23/23 F2P in 25m for $0.105
-- Task 2 Medium: 78/79 F2P in 23m for $0.082
-- Task 3 Very Hard: 82/82 F2P in 47m wall / 27m agent for $0.095
-- Task 4 Extreme: 20/22 F2P, 58/58 P2P, 84m wall / 81m agent, $0.379
+Task 4 (extreme probe) results:
+- DS4 solo: reward 0.0, F2P 20/22, P2P 58/58, 84m 31s wall, $0.379 recorded
+- DS4 → K3 review → DS4 repair: reward 0.0, F2P 19/22, P2P 58/58, 89m 12s wall, $1.512 inferred comparison
 
-Next: Task 4 controlled review (fresh DS4, independent K3 review, one DS4 repair) to test cheap recovery on the first DS4 miss.
+The K3 review was genuinely substantive (it found a real frame-ordering bug, a memory-count mismatch, and a dangling-pointer risk), but the two solo misses survived and one additional check failed. The repair pass rewrote exactly the memory-collection paths behind the new failure. Review + one repair did not recover the first DS4 miss.
+
+The lower recorded cost ($0.345 vs $0.379) is an accounting artifact: K3 roles are recorded at $0 by the gateway. At list price the route is about 4x the solo cost.
+
+Next run: Task 4 K3 solo — does the failure belong to DS4 or to the task?
 
 Task identities and fixtures stay private until each task closes.
 
+Approach, sanitized aggregate data, harness code, and caveats:
 https://github.com/bnivanov/omp-model-bench
 ```
 
 ## X
 
-157 characters:
+199 characters:
 
 ```text
-Task 4 discriminated DS4: 20/22 F2P, 84m, $0.379. First struggle after Phase 1 ceilings. Next: controlled review. https://github.com/bnivanov/omp-model-bench
+Task 4 review made it worse: 19/22 F2P vs 20/22 solo, 89m, ~$1.51 vs $0.38. K3 review + one DS4 repair failed to recover the first DS4 miss. Next: K3 solo. https://github.com/bnivanov/omp-model-bench
 ```

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "official_task_4_ds4_baseline_closeout_valid_miss",
+  "status": "official_task_4_review_closeout_negative_result",
   "published_at": "2026-08-14",
   "closed_at": "2026-08-14",
   "protocol": "v4",
@@ -12,19 +12,19 @@
     "task_index": 4,
     "task_difficulty": "extreme",
     "difficulty_basis": "operator_directed_structural_review_after_ds4_ceilings",
-    "canonical_routes": 1,
-    "statement": "Official Task 4 DS4 solo baseline closeout; valid miss on an operator-directed extremely-hard probe after Phase 1 DS4 ceilings. Routing evidence from one coding task, not a universal model leaderboard or statistically powered comparison."
+    "canonical_routes": 2,
+    "statement": "Official Task 4 closeout: DS4 solo valid miss (20/22 F2P) and controlled review valid regression (19/22 F2P). Routing evidence from one coding task, not a universal model leaderboard or statistically powered comparison."
   },
   "operator_decision": {
     "remaining_task_2_routes": "registered_but_unauthorized_review_deferred",
     "remaining_task_3_routes": "registered_but_unauthorized",
-    "remaining_task_4_routes": "registered_but_unauthorized_except_review",
-    "reason": "first_ds4_struggle_test_cheapest_after_implementation_recovery",
+    "remaining_task_4_routes": "registered_but_unauthorized",
+    "reason": "review_plus_repair_did_not_recover_the_miss_test_stronger_worker",
     "next_authorized_run": {
       "task_index": 4,
-      "condition_id": "ds4-k3-review-ds4",
-      "command": "python3 benchmark/scripts/run_round1.py --run-one 4 ds4-k3-review-ds4",
-      "note": "fresh DS4 implementation, independent K3 read-only review, exactly one DS4 repair"
+      "condition_id": "k3-solo",
+      "command": "python3 benchmark/scripts/run_round1.py --run-one 4 k3-solo",
+      "note": "fresh K3 implementation under the frozen protocol; tests whether the miss is DS4-specific or model-hard"
     }
   },
   "routes": [
@@ -60,6 +60,50 @@
         "uncached_input": 252736,
         "output": 262914
       }
+    },
+    {
+      "condition": "ds4-k3-review-ds4",
+      "treatment": "review",
+      "models": {
+        "worker": "deepseek/deepseek-v4-flash",
+        "reviewer": "kimi-code/k3",
+        "repair": "deepseek/deepseek-v4-flash"
+      },
+      "thinking": "max",
+      "repair_passes": 1,
+      "validation": "VALID",
+      "reward": 0.0,
+      "partial": 0.9625,
+      "f2p": {
+        "passed": 19,
+        "total": 22
+      },
+      "p2p": {
+        "passed": 58,
+        "total": 58
+      },
+      "runtime_seconds": 5352,
+      "agent_execution_seconds": 5294,
+      "verifier_seconds": 34,
+      "recorded_workflow_cost_usd": 0.3453783312,
+      "recorded_cost_note": "K3 reviewer recorded at $0 by the gateway",
+      "inferred_helper_cost_usd": 1.1669994,
+      "comparison_cost_usd": 1.5123777312,
+      "comparison_cost_basis": "recorded_worker_repair_plus_inferred_k3_list_price",
+      "tokens": {
+        "input_including_cache": 1601689,
+        "cache_read": 1522688,
+        "uncached_input": 79001,
+        "output": 31546
+      }
     }
-  ]
+  ],
+  "k3_pricing": {
+    "basis": "official_list_price_estimate",
+    "retrieved": "2026-08-12",
+    "cache_miss_input_usd_per_million": 3.0,
+    "cache_hit_input_usd_per_million": 0.3,
+    "output_usd_per_million": 15.0,
+    "note": "K3 reviewer had zero provider-recorded cost; estimates exclude taxes, discounts, subscriptions, and gateway billing behavior."
+  }
 }

@@ -2,7 +2,7 @@
 
 Task 4 DS4 baseline closeout for a bounded OMP × Pier/DeepSWE experiment on where to spend model intelligence in a coding-agent workflow: before implementation, at the mutation boundary, during implementation, after implementation, or on a stronger solo worker.
 
-**Status (2026-08-14):** Task 1 is complete. Task 2 DS4 solo is a valid near-miss. Task 3 DS4 solo is a valid ceiling. Task 4 DS4 solo is a valid miss (`20/22` F2P). Remaining Task 2, Task 3, and other Task 4 routes are not authorized; the next run is Task 4 controlled review.
+**Status (2026-08-14):** Task 1 is complete. Task 2 DS4 solo is a valid near-miss. Task 3 DS4 solo is a valid ceiling. Task 4 DS4 solo is a valid miss (`20/22` F2P); Task 4 K3 review + one repair regressed to `19/22`. Remaining Task 2, Task 3, and other Task 4 routes are not authorized; the next run is Task 4 K3 solo.
 
 ## Research question
 
@@ -71,19 +71,21 @@ Machine-readable values are in [`benchmark/results/task3-summary.json`](benchmar
 
 ## Task 4 aggregate outputs
 
-The extremely-hard Task 4 DS4 solo baseline is `VALID`. It preserved the full `58/58` P2P suite, missed two F2P checks (`20/22`), and therefore scored binary reward `0.0` with partial `0.975`.
+The extremely-hard Task 4 DS4 solo baseline is `VALID`: full `58/58` P2P, two F2P misses (`20/22`), reward `0.0`, partial `0.975`. The Task 4 controlled-review route (fresh DS4 implementation, read-only K3 review, one DS4 repair) is also `VALID` but regressed: `19/22` F2P, partial `0.9625`.
 
 | Route | Validation | Reward / F2P | Runtime | Comparison cost | Cost basis |
 |---|---|---:|---:|---:|---|
 | DS4 solo | `VALID` | `0.0` / `20/22` | 84m 31s wall / 80m 35s agent | $0.3795 | recorded |
+| DS4 → K3 review → DS4 repair | `VALID` | `0.0` / `19/22` | 89m 12s wall / 88m 14s agent | $1.5124 | DS4 recorded + K3 list-price estimate |
 
-Machine-readable values are in [`benchmark/results/task4-summary.json`](benchmark/results/task4-summary.json).
+K3 roles are recorded at `$0` by the gateway, so the review route's comparison cost uses the official Kimi K3 rate card. Machine-readable values are in [`benchmark/results/task4-summary.json`](benchmark/results/task4-summary.json).
 
 ## Task 4 findings
 
 1. **DS4 solo is a struggle, not a near-miss.** Perfect P2P and `20/22` F2P still fail the binary reward. Two F2P checks remain.
 2. **The extreme probe discriminated DS4.** Agent time (`80m 35s`) and recorded cost (`$0.3795`) are several times the Phase 1 DS4 baselines, unlike Tasks 1–3.
-3. **The next spend is Task 4 controlled review**, the cheapest after-implementation recovery hypothesis on the first DS4 struggle.
+3. **Review plus one repair did not recover the miss; it regressed it.** `19/22` F2P, slower (`89m 12s`), and about `4×` the solo comparison cost once K3 list pricing is included. The K3 review found real issues, but the two solo misses survived and one additional check failed.
+4. **The next spend is Task 4 K3 solo**, testing whether the failure is DS4-specific or model-hard.
 
 ## Phase 1 complexity ladder
 
@@ -98,13 +100,13 @@ Machine-readable values are in [`benchmark/results/task4-summary.json`](benchmar
 
 ## Next run
 
-Task 4's DS4 baseline is closed as a valid miss. Remaining Task 2, Task 3, and other Task 4 routes stay registered but unauthorized. The next authorized benchmark run tests whether independent review can recover the two F2P misses:
+Task 4's controlled review is closed as a valid regression. Remaining Task 2, Task 3, and other Task 4 routes stay registered but unauthorized. The next authorized benchmark run tests whether the Task 4 miss is DS4-specific or model-hard with a stronger solo worker:
 
 ```sh
-python3 benchmark/scripts/run_round1.py --run-one 4 ds4-k3-review-ds4
+python3 benchmark/scripts/run_round1.py --run-one 4 k3-solo
 ```
 
-Run it only from a clean committed worktree after the focused tests and local readiness gate pass. Do not use `--force`. Review the new run contract, validation, result, logs, reviewer isolation, one repair, accounting, and both patch captures before authorizing another Task 4 condition.
+Run it only from a clean committed worktree after the focused tests and local readiness gate pass. Do not use `--force`. Review the new run contract, validation, result, logs, accounting, and both patch captures before authorizing another Task 4 condition.
 
 ## Repository map
 

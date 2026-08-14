@@ -2,11 +2,11 @@
 
 Updated after every reviewed v4 run. This is the ongoing empirical record; `benchmark/EXPERIMENT.md` remains the experiment specification and decision ledger.
 
-> **Status (2026-08-14): official Task 4 DS4 baseline closeout.** Task 4 DS4
-> solo is a valid miss (`20/22` F2P, `58/58` P2P). This is the first DS4
-> struggle after the Phase 1 ceilings. Remaining Task 2, Task 3, and other
-> Task 4 routes stay registered but unauthorized. The next evidence run is
-> Task 4 controlled review.
+> **Status (2026-08-14): official Task 4 review closeout.** Task 4 DS4 solo is
+> a valid miss (`20/22` F2P); Task 4 K3 review + one DS4 repair is a valid
+> regression (`19/22` F2P). Controlled review did not recover the first DS4
+> struggle. Remaining Task 2, Task 3, and other Task 4 routes stay registered
+> but unauthorized. The next evidence run is Task 4 K3 solo.
 
 ## Recording rules
 
@@ -238,6 +238,21 @@ The official page states that 1M means 1,000,000 tokens and that prices exclude 
 - **Evidence:** one DS4 worker; empty stderr; no implementation subagents; no retries or exceptions; collected and independently captured final patches matched SHA-256 `738dfb6e7c009a96b90676e2161d57c9b05c200bb522a6c66c89bf60e55c6ef7`; worker stage totals reconcile exactly to top-level tokens and recorded cost. Worker tools were `read`, `grep`, `edit`, `write`, and `bash`.
 - **Interpretation:** this is a struggle, not a near-miss. Two F2P checks failed while the P2P suite stayed perfect. Agent time and recorded cost are several times the Phase 1 DS4 baselines, so the extreme probe discriminated DS4 on quality, latency, and cost.
 
+### Task 4 — DS4 → K3 review → DS4 repair
+
+- **Run:** `v4-t04-ds4-k3-review-ds4`
+- **Condition:** `ds4-k3-review-ds4`; treatment `review`
+- **Commit:** `a9c3c7ff496069a98a1ffd804482c6598a220b1d`
+- **Validation:** `VALID`; no violations
+- **Models:** worker `deepseek/deepseek-v4-flash` `thinking=max`; reviewer `kimi-code/k3` `thinking=max` read-only; repair `deepseek/deepseek-v4-flash` `thinking=max`, exactly one pass
+- **Quality:** reward `0.0`; partial `0.9625`; F2P `19/22`; P2P `58/58`
+- **Runtime:** `89m 12s` wall (`5,352s`); agent execution `88m 14s` (`5,294s`); verification `34s`
+- **Tokens:** input including cache `78,583,833`; cache read `78,164,992`; uncached input `418,841`; output `328,697`
+- **Recorded workflow cost:** `$0.3453783312` (K3 reviewer recorded at `$0` by the gateway)
+- **Inferred K3 reviewer cost:** `$1.1669994` (`79,001` uncached input + `1,522,688` cache-read + `31,546` output at official list price) → comparison cost `$1.5123777312`
+- **Evidence:** observed stage models worker/reviewer/repair; collected and independently captured final patches matched SHA-256 `b5cd025daa990339059eb440dac4ee34bceb92f23b7d407524fecb781351ce0d`; stage accounting reconciles exactly to top-level tokens and recorded cost; reviewer stayed read-only.
+- **Interpretation:** controlled review did not recover the miss; it regressed one check. The K3 review was substantive (one HIGH frame-ordering bug, two MEDIUM memory/UB issues, three LOWs), but its static pass explicitly validated the locals typing that the two still-failing checks exercise. The repair pass rewrote exactly the memory-collection and frame-order paths, and the final fail set adds one multiple-memories check absent from solo. The lower recorded cost is an accounting artifact of K3 being recorded at `$0`; at list price this route is about `4.0×` the solo comparison cost. This is the first negative result for the controlled-review treatment.
+
 ## Infrastructure evidence
 
 ### Network isolation smoke
@@ -284,6 +299,7 @@ The official page states that 1M means 1,000,000 tokens and that prices exclude 
 12. **Task 3 DS4 solo is a valid ceiling:** reward `1.0`, F2P `82/82`, P2P `2/2`, `46m 56s` wall / `27m 00s` agent, `$0.0952155512` recorded. The Very Hard structural label is retained; empirically DS4 did not struggle. Remaining Task 3 routes cannot show quality uplift on this ceiling.
 13. **The original Very Hard slot did not discriminate DS4.** After that ceiling, remaining unused holdouts were re-ranked. Task 4 is the unused holdout with the strongest pre-run failure prediction: specialized runtime internals, cross-module coupling, and a byte-exact hidden oracle.
 14. **Task 4 DS4 solo is a valid struggle:** reward `0.0`, F2P `20/22`, P2P `58/58`, partial `0.975`, `84m 31s` wall / `80m 35s` agent, `$0.3794855904` recorded. The extreme label is retained and now has empirical support. This is the first DS4 quality gap that also cost and latency-discriminated.
+15. **Task 4 review/repair regressed the miss:** reward `0.0`, F2P `19/22` vs solo `20/22`, partial `0.9625` vs `0.975`, `89m 12s` wall vs `84m 31s`, comparison cost `$1.5123777312` vs `$0.3794855904` recorded. The K3 review was substantive but its static read validated the exact locals-capture paths that still fail; the repair touched the memory-collection paths behind the new third failure. The one-repair recovery hypothesis failed on the first discriminating task.
 
 ## Task 4 decision and continuation
 
@@ -300,9 +316,9 @@ Phase 1 DS4 baselines are complete across the frozen Very Easy → Medium → Ve
 
 The original Phase 1 ladder is complete. DS4 reached full quality on both the empirical Very Easy task and the pre-run Very Hard task, and missed one F2P check on Medium. File count and cross-layer glue were not enough to produce a DS4 struggle.
 
-The Task 4 DS4 solo baseline is accepted as `VALID`. The hypothesized fail occurred: two F2P checks missed, agent time was `80m 35s`, and recorded cost was `$0.3795`. Remaining Task 4 routes other than controlled review stay registered but unauthorized. Remaining Task 2 and Task 3 routes stay deferred; Task 4 is now the larger and more expensive quality gap.
+The Task 4 DS4 solo baseline is accepted as `VALID`. The hypothesized fail occurred: two F2P checks missed, agent time was `80m 35s`, and recorded cost was `$0.3795`. The controlled-review route is closed as `VALID` with a regression; all other Task 4 routes stay registered but unauthorized. Remaining Task 2 and Task 3 routes stay deferred; Task 4 is now the larger and more expensive quality gap.
 
-The next authorized evidence run is Task 4 `ds4-k3-review-ds4`: a fresh DS4 implementation, independent K3 read-only review, and exactly one DS4 repair. That is the cheapest after-implementation recovery hypothesis on the first DS4 struggle. Task identities stay private until the task closes.
+The Task 4 review run is closed as a valid regression: review plus one repair scored `19/22` F2P versus `20/22` solo. The after-implementation recovery hypothesis failed on this task. The next authorized evidence run is Task 4 `k3-solo`: a fresh K3 implementation under the frozen protocol, testing whether the miss is DS4-specific or model-hard. All other Task 2, Task 3, and Task 4 routes stay registered but unauthorized. Task identities stay private until the task closes.
 
 The two canonical Task 1 advisor conditions remain `VALID_MODEL_TIMEOUT` with no result-based retry. `k3-solo` and `k3-prewalk-ds4-k3-review` remain retired unrun for Task 1 and are not part of the reported Task 1 evidence.
 
