@@ -1,0 +1,8 @@
+task:
+  batch: false
+  maxConcurrency: 2
+  maxRecursionDepth: 1
+  enableEffort: false
+
+advisor:
+  enabled: false

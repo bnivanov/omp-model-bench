@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "task": "datacurve/tengo-callable-instance-isolation",
+  "condition": "r1-t01-A",
+  "treatment": "solo",
+  "worker_model": "deepseek/deepseek-v4-flash",
+  "omp_version": "17.2.11",
+  "classification": "valid_fail_legacy_harness",
+  "reward": 0,
+  "partial": 0.993103448275862,
+  "f2p_total": 23,
+  "f2p_passed": 22,
+  "p2p_total": 122,
+  "p2p_passed": 122,
+  "cost_usd": 0.129369296,
+  "input_tokens_including_cache": 24423976,
+  "cache_read_tokens": 24309120,
+  "output_tokens": 161514,
+  "duration_seconds": 2695.723783,
+  "artifact_patch_bytes": 30295,
+  "exception": null,
+  "notes": [
+    "Pier execution and DeepSWE verification completed cleanly under the pre-v2 harness.",
+    "Binary reward is 0 because not every F2P test passed.",
+    "Hidden verifier failure details are intentionally not recorded here to avoid contaminating future treatment prompts.",
+    "Retain as a legacy reference; establish a fresh v2 DS4 solo baseline before causal treatment comparisons if v2 changes the effective prompt/tool surface."
+  ],
+  "comparable_to_v2": false
+}

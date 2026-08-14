@@ -1,0 +1,76 @@
+{
+  "schema_version": 4,
+  "common": {
+    "thinking": "max",
+    "advisor_sync_backlog": 1,
+    "advisor_immune_turns": 3,
+    "repair_passes": 1,
+    "subagents": false,
+    "gateway_providers": ["deepseek", "kimi-code", "openai-codex"]
+  },
+  "conditions": {
+    "ds4-solo": {
+      "phase": "harness",
+      "treatment": "solo",
+      "worker_model": "deepseek/deepseek-v4-flash",
+      "prompt_scaffold": "none"
+    },
+    "k3-plan-yolo-ds4": {
+      "phase": "harness",
+      "treatment": "plan_yolo",
+      "worker_model": "deepseek/deepseek-v4-flash",
+      "planner_model": "kimi-code/k3",
+      "prompt_scaffold": "none"
+    },
+    "k3-prewalk-ds4": {
+      "phase": "harness",
+      "treatment": "prewalk",
+      "worker_model": "deepseek/deepseek-v4-flash",
+      "prewalker_model": "kimi-code/k3",
+      "prompt_scaffold": "none"
+    },
+    "ds4-k3-advisor": {
+      "phase": "harness",
+      "treatment": "advisor",
+      "worker_model": "deepseek/deepseek-v4-flash",
+      "advisor_model": "kimi-code/k3",
+      "prompt_scaffold": "none"
+    },
+    "ds4-k3-review-ds4": {
+      "phase": "harness",
+      "treatment": "review",
+      "worker_model": "deepseek/deepseek-v4-flash",
+      "reviewer_model": "kimi-code/k3",
+      "prompt_scaffold": "none"
+    },
+    "k3-plan-yolo-ds4-k3-review": {
+      "phase": "conditional",
+      "treatment": "plan_yolo_review",
+      "worker_model": "deepseek/deepseek-v4-flash",
+      "planner_model": "kimi-code/k3",
+      "reviewer_model": "kimi-code/k3",
+      "prompt_scaffold": "none"
+    },
+    "k3-prewalk-ds4-k3-review": {
+      "phase": "conditional",
+      "treatment": "prewalk_review",
+      "worker_model": "deepseek/deepseek-v4-flash",
+      "prewalker_model": "kimi-code/k3",
+      "reviewer_model": "kimi-code/k3",
+      "prompt_scaffold": "none"
+    },
+    "ds4-luna-advisor": {
+      "phase": "conditional",
+      "treatment": "advisor",
+      "worker_model": "deepseek/deepseek-v4-flash",
+      "advisor_model": "openai-codex/gpt-5.6-luna",
+      "prompt_scaffold": "none"
+    },
+    "k3-solo": {
+      "phase": "frontier",
+      "treatment": "solo",
+      "worker_model": "kimi-code/k3",
+      "prompt_scaffold": "none"
+    }
+  }
+}

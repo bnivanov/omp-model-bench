@@ -1,0 +1,13 @@
+diff --git a/src/pier/environments/agent_setup.py b/src/pier/environments/agent_setup.py
+index 6f1181b..4c45b75 100644
+--- a/src/pier/environments/agent_setup.py
++++ b/src/pier/environments/agent_setup.py
+@@ -114,7 +114,7 @@ auth_param basic realm PierPolicyProxy
+ acl authenticated proxy_auth REQUIRED
+ 
+ acl SSL_ports port 443
+-acl Safe_ports port 80 443
++acl Safe_ports port 80 443 4000
+ acl CONNECT method CONNECT
+ acl allowed_domains dstdomain "/tmp/allowed_domains.txt"
+ 

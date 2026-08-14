@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "status": "preliminary_task_1_closeout",
+  "published_at": "2026-08-14",
+  "protocol": "v4",
+  "scope": {
+    "tasks": 1,
+    "canonical_routes": 7,
+    "statement": "Routing evidence from one coding task; not a universal model leaderboard or statistically powered comparison."
+  },
+  "metrics": {
+    "p2p": {"passed": 122, "total": 122, "applies_to": "all canonical routes"},
+    "k3_pricing": {
+      "basis": "official_list_price_estimate",
+      "retrieved": "2026-08-12",
+      "cache_miss_input_usd_per_million": 3.0,
+      "cache_hit_input_usd_per_million": 0.3,
+      "output_usd_per_million": 15.0,
+      "note": "K3 roles had zero provider-recorded cost; estimates exclude taxes, discounts, subscriptions, and gateway billing behavior."
+    }
+  },
+  "routes": [
+    {
+      "condition": "ds4-solo",
+      "treatment": "solo",
+      "models": {"worker": "deepseek/deepseek-v4-flash:max"},
+      "validation": "VALID",
+      "reward": 1.0,
+      "partial": 1.0,
+      "f2p": {"passed": 23, "total": 23},
+      "p2p": {"passed": 122, "total": 122},
+      "runtime_seconds": 1509,
+      "recorded_workflow_cost_usd": 0.1047089904,
+      "inferred_helper_cost_usd": 0.0,
+      "comparison_cost_usd": 0.1047089904,
+      "comparison_cost_basis": "recorded"
+    },
+    {
+      "condition": "k3-plan-yolo-ds4",
+      "treatment": "plan_yolo",
+      "models": {"planner": "kimi-code/k3:max", "worker": "deepseek/deepseek-v4-flash:max"},
+      "validation": "VALID",
+      "reward": 1.0,
+      "partial": 1.0,
+      "f2p": {"passed": 23, "total": 23},
+      "p2p": {"passed": 122, "total": 122},
+      "runtime_seconds": 2209,
+      "recorded_workflow_cost_usd": 0.0533104656,
+      "inferred_helper_cost_usd": 1.2861534,
+      "comparison_cost_usd": 1.3394638656,
+      "comparison_cost_basis": "recorded_worker_plus_inferred_k3_list_price"
+    },
+    {
+      "condition": "k3-prewalk-ds4",
+      "treatment": "prewalk",
+      "models": {"prewalker": "kimi-code/k3:max", "worker": "deepseek/deepseek-v4-flash:max"},
+      "validation": "VALID",
+      "reward": 0.0,
+      "partial": 0.9931034483,
+      "f2p": {"passed": 22, "total": 23},
+      "p2p": {"passed": 122, "total": 122},
+      "runtime_seconds": 1131,
+      "recorded_workflow_cost_usd": 0.037605988,
+      "inferred_helper_cost_usd": 0.5734584,
+      "comparison_cost_usd": 0.611064388,
+      "comparison_cost_basis": "recorded_worker_plus_inferred_k3_list_price"
+    },
+    {
+      "condition": "ds4-k3-advisor",
+      "treatment": "advisor",
+      "models": {"worker": "deepseek/deepseek-v4-flash:max", "advisor": "kimi-code/k3:max"},
+      "validation": "VALID_MODEL_TIMEOUT",
+      "reward": 1.0,
+      "partial": 1.0,
+      "f2p": {"passed": 23, "total": 23},
+      "p2p": {"passed": 122, "total": 122},
+      "runtime_seconds": 5510,
+      "agent_budget_seconds": 5400,
+      "deadline_state": "worker_final_emitted_advisor_draining",
+      "recorded_workflow_cost_usd": 0.1215292232,
+      "inferred_helper_cost_usd": 10.2769536,
+      "comparison_cost_usd": 10.3984828232,
+      "comparison_cost_basis": "recorded_worker_plus_inferred_k3_list_price"
+    },
+    {
+      "condition": "ds4-k3-review-ds4",
+      "treatment": "review",
+      "models": {"worker": "deepseek/deepseek-v4-flash:max", "reviewer": "kimi-code/k3:max", "repair": "deepseek/deepseek-v4-flash:max"},
+      "validation": "VALID",
+      "reward": 1.0,
+      "partial": 1.0,
+      "f2p": {"passed": 23, "total": 23},
+      "p2p": {"passed": 122, "total": 122},
+      "runtime_seconds": 2800,
+      "recorded_workflow_cost_usd": 0.1310344504,
+      "inferred_helper_cost_usd": 0.67854,
+      "comparison_cost_usd": 0.8095744504,
+      "comparison_cost_basis": "recorded_worker_repair_plus_inferred_k3_list_price"
+    },
+    {
+      "condition": "k3-plan-yolo-ds4-k3-review",
+      "treatment": "plan_yolo_review",
+      "models": {"planner": "kimi-code/k3:max", "worker": "deepseek/deepseek-v4-flash:max", "reviewer": "kimi-code/k3:max", "repair": "deepseek/deepseek-v4-flash:max"},
+      "validation": "VALID",
+      "reward": 1.0,
+      "partial": 1.0,
+      "f2p": {"passed": 23, "total": 23},
+      "p2p": {"passed": 122, "total": 122},
+      "runtime_seconds": 2825,
+      "recorded_workflow_cost_usd": 0.0693773584,
+      "inferred_helper_cost_usd": 1.632132,
+      "comparison_cost_usd": 1.7015093584,
+      "comparison_cost_basis": "recorded_worker_repair_plus_inferred_k3_list_price"
+    },
+    {
+      "condition": "ds4-luna-advisor",
+      "treatment": "advisor",
+      "models": {"worker": "deepseek/deepseek-v4-flash:max", "advisor": "openai-codex/gpt-5.6-luna:max"},
+      "validation": "VALID_MODEL_TIMEOUT",
+      "reward": 1.0,
+      "partial": 1.0,
+      "f2p": {"passed": 23, "total": 23},
+      "p2p": {"passed": 122, "total": 122},
+      "runtime_seconds": 5475,
+      "agent_budget_seconds": 5400,
+      "deadline_state": "worker_still_active",
+      "recorded_workflow_cost_usd": 1.3179138976,
+      "inferred_helper_cost_usd": 0.0,
+      "comparison_cost_usd": 1.3179138976,
+      "comparison_cost_basis": "recorded"
+    }
+  ]
+}
