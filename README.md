@@ -2,7 +2,7 @@
 
 Task 3 DS4 baseline closeout and Phase 1 roadmap for a bounded OMP × Pier/DeepSWE experiment on where to spend model intelligence in a coding-agent workflow: before implementation, at the mutation boundary, during implementation, after implementation, or on a stronger solo worker.
 
-**Status (2026-08-14):** Task 1 is complete. Task 2 DS4 solo is a valid near-miss. Task 3 DS4 solo is a valid ceiling. Phase 1 DS4 baselines are complete (`3/3`) on the frozen Very Easy → Medium → Very Hard ladder. Remaining Task 3 routes are not authorized; the next run is Task 2 controlled review.
+**Status (2026-08-14):** Task 1 is complete. Task 2 DS4 solo is a valid near-miss. Task 3 DS4 solo is a valid ceiling. Phase 1 DS4 baselines are complete (`3/3`) on the frozen Very Easy → Medium → Very Hard ladder. Remaining Task 2 and Task 3 routes are not authorized; the next run is an operator-directed extremely-hard DS4 solo probe (Task 4).
 
 ## Research question
 
@@ -67,27 +67,28 @@ Machine-readable values are in [`benchmark/results/task3-summary.json`](benchmar
 
 1. **DS4 solo is a ceiling, not a struggle.** Full F2P and P2P at `$0.0952` recorded cost. Agent time (`27m 00s`) is comparable to Task 1; wall time is longer because environment setup and verification took about `12m 31s` and `7m 09s`.
 2. **The pre-run Very Hard label did not produce a DS4 failure.** Broader implementation surface still yielded full measured quality, so remaining Task 3 routes cannot show quality uplift.
-3. **The only remaining Phase 1 quality gap is Task 2.** Operator decision: skip remaining Task 3 routes and run Task 2 controlled review.
+3. **The original Very Hard slot did not discriminate DS4.** Remaining Task 3 routes stay unauthorized. The next spend is an extremely-hard DS4 probe from the unused holdout pool, not Task 2 review.
 
 ## Phase 1 complexity ladder
 
 | Task | Target difficulty | Calibration | Status |
 |---|---|---|---|
 | Task 1 | Very Easy | Empirical: DS4 solo reached full measured quality in 25m 09s | Complete |
-| Task 2 | Medium | Pre-run structural review: broad behavior but localized implementation surface | DS4 near-miss; review next |
+| Task 2 | Medium | Pre-run structural review: broad behavior but localized implementation surface | Complete (DS4 near-miss); review deferred |
 | Task 3 | Very Hard | Pre-run structural review: cross-layer implementation and integration surface | Complete (DS4 ceiling) |
+| Task 4 | Extreme | Operator-directed structural review after DS4 ceilings: specialized runtime internals plus a byte-exact hidden oracle | Next (DS4 solo) |
 
-“Very Easy” is a model-relative empirical label, not a claim that Task 1 is intrinsically trivial. Tasks 2 and 3 were selected before execution using instruction breadth, reference patch scope, subsystem coupling, state/algorithmic complexity, and regression surface. Their identities and fixtures remain private until each task closes to reduce benchmark contamination.
+“Very Easy” is a model-relative empirical label, not a claim that Task 1 is intrinsically trivial. Tasks 2 and 3 were selected before execution. Task 4 was selected later from unused holdouts after DS4 cleared the original Very Hard slot, using the same structural criteria plus hidden-oracle exactness. A DS4 fail is hypothesized, not guaranteed. Identities and fixtures remain private until each task closes to reduce benchmark contamination.
 
 ## Next run
 
-Task 3's DS4 baseline is closed as a ceiling. Remaining Task 3 routes stay registered but unauthorized. The next authorized benchmark run tests whether independent review can recover Task 2's one F2P miss:
+Task 3's DS4 baseline is closed as a ceiling. Remaining Task 2 and Task 3 routes stay registered but unauthorized. The next authorized benchmark run points DS4 at the unused holdout with the strongest pre-run failure prediction:
 
 ```sh
-python3 benchmark/scripts/run_round1.py --run-one 2 ds4-k3-review-ds4
+python3 benchmark/scripts/run_round1.py --run-one 4 ds4-solo
 ```
 
-Run it only from a clean committed worktree after the focused tests and local readiness gate pass. Do not use `--force`. Review the new run contract, validation, result, logs, accounting, and both patch captures before authorizing another Task 2 condition.
+Run it only from a clean committed worktree after the focused tests and local readiness gate pass. Do not use `--force`. Review the new run contract, validation, result, logs, accounting, and both patch captures before authorizing another Task 4 condition.
 
 ## Repository map
 
@@ -110,8 +111,6 @@ This public snapshot contains the approach, orchestration code, focused tests, p
 - hidden verifier output and per-test failure details;
 - frozen DeepSWE task fixtures, solutions, and test patches;
 - the pinned OMP executable and local vendor checkouts;
-- unreleased task-selection manifests and remaining holdout identities.
-
-The published freeze utility retains the original seeded candidate-pool logic; exact remaining task-identity mapping is enforced privately while holdouts stay embargoed.
+- unreleased task-selection manifests and future holdout identities.
 
 Those exclusions prevent credential disclosure, hidden-test contamination, benchmark leakage, and redistribution of third-party binaries or task material. The public snapshot supports review of the method and aggregate evidence; exact replay requires separately authorized upstream checkouts, model access, and benchmark inputs.

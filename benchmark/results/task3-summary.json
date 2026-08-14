@@ -16,12 +16,14 @@
     "statement": "Official Task 3 DS4 solo baseline closeout; Phase 1 DS4 baselines complete across Very Easy, Medium, and Very Hard. Ceiling routing evidence from one coding task, not a universal model leaderboard or statistically powered comparison."
   },
   "operator_decision": {
+    "remaining_task_2_routes": "registered_but_unauthorized_review_deferred",
     "remaining_task_3_routes": "registered_but_unauthorized",
-    "reason": "ceiling_result_no_quality_uplift_possible",
+    "reason": "ceiling_result_no_quality_uplift_possible_redirect_to_extreme_probe",
     "next_authorized_run": {
-      "task_index": 2,
-      "condition_id": "ds4-k3-review-ds4",
-      "command": "python3 benchmark/scripts/run_round1.py --run-one 2 ds4-k3-review-ds4"
+      "task_index": 4,
+      "condition_id": "ds4-solo",
+      "command": "python3 benchmark/scripts/run_round1.py --run-one 4 ds4-solo",
+      "note": "operator-directed extremely-hard DS4 probe from unused holdouts after DS4 ceilings"
     }
   },
   "routes": [

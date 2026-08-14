@@ -1,7 +1,8 @@
 # OMP × Pier Benchmark — Canonical Experiment
 
 Status: **Task 3 DS4 baseline complete (ceiling); Phase 1 DS4 baselines
-complete (`3/3`); Task 2 controlled review is the next authorized run**.
+complete (`3/3`); Task 4 extremely-hard DS4 solo probe is the next authorized
+run**.
 
 ## 1. Decision we are trying to make
 
@@ -300,18 +301,21 @@ condition, gate, or frozen decision changes; do not create parallel status files
   advisor route. Luna solo, Sol, and `ultrathink` remain removed.
 - Task 1 is officially closed; Task 2 DS4 solo is a reviewed near-miss; Task 3
   DS4 solo is a reviewed ceiling; Phase 1 DS4 baselines are complete at `3/3`.
-  Remaining Task 3 routes stay registered but unauthorized.
-- Phase 1 remains frozen as empirically Very Easy → Medium → Very Hard. The next
-  authorized run is Task 2 `ds4-k3-review-ds4` to test recovery of the only
-  remaining quality gap. No other Task 2 or Task 3 condition is authorized until
-  that review passes artifact review.
+  Remaining Task 2 and Task 3 routes stay registered but unauthorized.
+- The historical Phase 1 ladder remains Very Easy → Medium → Very Hard. Because
+  DS4 cleared the original Very Hard slot, the next authorized run is Task 4
+  `ds4-solo`: an operator-directed extremely-hard probe from the unused holdout
+  pool. No other Task 2, Task 3, or Task 4 condition is authorized until that
+  baseline passes artifact review.
 - Historical `benchmark/results/round1-baseline.json` remains a legacy reference,
   not a causal v4 baseline.
 
 ### Frozen decisions
 
-1. Phase 1 contains exactly three tasks in the frozen Very Easy → Medium → Very
-   Hard order; future task identities remain private until their task closes.
+1. The historical Phase 1 ladder remains three tasks in Very Easy → Medium →
+   Very Hard order. Task 4 is an extra operator-directed extremely-hard probe
+   from remaining holdouts after DS4 ceilings; future task identities remain
+   private until their task closes.
 2. No implementation subagents or second implementation worker.
 3. Every model role and handoff uses `thinking=max`.
 4. `plan_yolo` and `prewalk` remain separate mutation-boundary hypotheses.
@@ -355,20 +359,20 @@ Repeatable command:
 ### Operator launch contract
 
 Task 3's DS4 solo baseline is reviewed and closed as a valid ceiling. Remaining
-Task 3 routes stay registered but must not be launched. Phase 1 DS4 baselines
-are complete. The next authorized run returns to the Task 2 quality gap with
-controlled review:
+Task 2 and Task 3 routes stay registered but must not be launched. Phase 1 DS4
+baselines are complete. Because that Very Hard slot was a DS4 ceiling, the next
+authorized run is an extremely-hard DS4 solo probe from the unused holdout pool:
 
 ```sh
-python3 benchmark/scripts/run_round1.py --run-one 2 ds4-k3-review-ds4
+python3 benchmark/scripts/run_round1.py --run-one 4 ds4-solo
 ```
 
-Expected canonical job directory: `benchmark/runs/v4/v4-t02-ds4-k3-review-ds4/`.
-Never use `--force`. Launch only from a clean committed worktree after the
-focused harness tests and repeatable local readiness gate pass. After the
-command exits, inspect `run-contract.json`, `validation.json`, `result.json`,
-Pier config/lock, every stage JSONL/stderr, accounting, and both patch captures
-before authorizing any additional Task 2 condition.
+Expected canonical job directory: `benchmark/runs/v4/v4-t04-ds4-solo/`. Never
+use `--force`. Launch only from a clean committed worktree after the focused
+harness tests and repeatable local readiness gate pass. After the command
+exits, inspect `run-contract.json`, `validation.json`, `result.json`, Pier
+config/lock, every stage JSONL/stderr, accounting, and both patch captures
+before authorizing any additional Task 4 condition.
 
 ### Change log
 
@@ -443,6 +447,10 @@ before authorizing any additional Task 2 condition.
   P2P, reward `1.0`, `46m 56s` wall / `27m 00s` agent, `$0.0952155512`). Left
   remaining Task 3 routes unauthorized and authorized Task 2 controlled review
   as the next run to test recovery of the only remaining quality gap.
+- 2026-08-14 — Operator redirected the next spend after DS4 cleared the original
+  Very Hard slot. Remaining unused holdouts were re-ranked with the same
+  structural criteria plus hidden-oracle exactness. Task 4 is now an
+  extremely-hard DS4 solo probe; Task 2 review is deferred, not cancelled.
 
 ## 11. Review gate
 

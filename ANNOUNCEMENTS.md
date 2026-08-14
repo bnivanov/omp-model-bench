@@ -3,30 +3,24 @@
 ## Discord
 
 ```text
-Phase 1 DS4 baselines of my three-task OMP model-routing benchmark are complete (`3/3`) on a frozen Very Easy → Medium → Very Hard ladder.
+DS4 cleared the original Very Hard slot of my OMP routing benchmark, so I am not spending the next run on Task 2 review.
 
-Task 3 DS4 solo (Very Hard):
-- validation VALID
-- reward 1.0
-- F2P 82/82
-- P2P 2/2
-- 46m 56s wall / 27m 00s agent
-- $0.0952 recorded
+Phase 1 DS4 baselines (`3/3`):
+- Task 1 Very Easy: 23/23 F2P in 25m for $0.105
+- Task 2 Medium: 78/79 F2P in 23m for $0.082
+- Task 3 Very Hard: 82/82 F2P in 47m wall / 27m agent for $0.095 — a ceiling, not a struggle
 
-This is a ceiling, not a struggle. Agent time stayed comparable to Task 1; wall time was longer because environment setup and verification took about 12m and 7m. Remaining Task 3 routes are registered but not authorized, because extra spend cannot show quality uplift on a ceiling task.
-
-The only remaining Phase 1 quality gap is Task 2's 78/79 F2P near-miss. Next run: Task 2 controlled review (DS4 implement → K3 read-only review → one DS4 repair).
+Next: Task 4, an operator-directed extremely-hard DS4 solo probe from the unused holdout pool. I re-ranked remaining tasks after the DS4 ceilings and picked the one with the strongest pre-run failure prediction: specialized runtime internals plus a byte-exact hidden oracle. A fail is hypothesized, not guaranteed.
 
 Task identities and fixtures stay private until each task closes.
 
-Approach, sanitized aggregate data, harness code, and caveats:
 https://github.com/bnivanov/omp-model-bench
 ```
 
 ## X
 
-216 characters:
+264 characters:
 
 ```text
-Phase 1 DS4 baselines are done (3/3). Very Hard Task 3: DS4 solo hit 82/82 F2P + 2/2 P2P in 47m for $0.095. Ceiling, not a struggle. Next: Task 2 review for the 78/79 miss. https://github.com/bnivanov/omp-model-bench
+DS4 cleared my original Very Hard coding task (82/82 F2P in 47m for $0.095). Next run is not Task 2 review. Task 4 is an extremely-hard DS4 solo probe from unused holdouts: runtime internals + a byte-exact hidden oracle. https://github.com/bnivanov/omp-model-bench
 ```
