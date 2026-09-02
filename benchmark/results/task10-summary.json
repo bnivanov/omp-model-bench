@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "status": "task_10_complete",
+  "published_at": "2026-09-01",
+  "closed_at": "2026-09-01",
+  "protocol": "v4",
+  "scope": {
+    "task_index": 10,
+    "task_id": "boa-hierarchical-evaluation-cancellation",
+    "task_difficulty": "extreme",
+    "language": "rust",
+    "repository": "boa-dev/boa",
+    "canonical_routes": 4,
+    "statement": "Task 10 evaluation: DS4 solo failed 1 test (16/17 F2P) and timed out after 92m 41s. K3 Prewalk + DS4 timed out in prewalk loop. K3 Solo reached 100% (17/17 F2P) but timed out at 92m 45s ($2.7873). K3 Plan-YOLO + DS4 reached 100% full recovery (17/17 F2P, 7/7 P2P, reward 1.0) in 31m 24s ($0.8810) — 3x faster and 68% cheaper than K3 solo."
+  },
+  "routes": [
+    {
+      "condition": "ds4-solo",
+      "treatment": "solo",
+      "models": {
+        "worker": "deepseek/deepseek-v4-flash"
+      },
+      "thinking": "max",
+      "validation": "VALID_MODEL_TIMEOUT",
+      "reward": 0.0,
+      "partial": 0.9583333333333334,
+      "f2p": {
+        "passed": 16,
+        "total": 17
+      },
+      "p2p": {
+        "passed": 7,
+        "total": 7
+      },
+      "runtime_seconds": 5561,
+      "agent_execution_seconds": 5404,
+      "environment_setup_seconds": 6,
+      "verifier_seconds": 151,
+      "recorded_workflow_cost_usd": 0.1722841176,
+      "comparison_cost_usd": 0.1722841176,
+      "comparison_cost_basis": "recorded_ds4_gateway_cost",
+      "tokens": {
+        "input_including_cache": 38998219,
+        "cache_read": 38849792,
+        "uncached_input": 148427,
+        "output": 152589
+      }
+    },
+    {
+      "condition": "k3-plan-yolo-ds4",
+      "treatment": "plan_yolo",
+      "models": {
+        "planner": "kimi-code/k3",
+        "worker": "deepseek/deepseek-v4-flash"
+      },
+      "thinking": "max",
+      "validation": "VALID",
+      "reward": 1.0,
+      "partial": 1.0,
+      "f2p": {
+        "passed": 17,
+        "total": 17
+      },
+      "p2p": {
+        "passed": 7,
+        "total": 7
+      },
+      "runtime_seconds": 1884,
+      "agent_execution_seconds": 1788,
+      "environment_setup_seconds": 6,
+      "verifier_seconds": 90,
+      "recorded_workflow_cost_usd": 0.0497402248,
+      "comparison_cost_usd": 0.8810,
+      "comparison_cost_basis": "inferred_k3_planner_plus_recorded_ds4_worker",
+      "tokens": {
+        "input_including_cache": 8559158,
+        "cache_read": 8381056,
+        "uncached_input": 178102,
+        "output": 74160
+      }
+    },
+    {
+      "condition": "k3-prewalk-ds4",
+      "treatment": "prewalk",
+      "models": {
+        "prewalker": "kimi-code/k3",
+        "worker": "deepseek/deepseek-v4-flash"
+      },
+      "thinking": "max",
+      "validation": "INVALID_HARNESS",
+      "reward": 0.0,
+      "partial": 0.0,
+      "f2p": {
+        "passed": 0,
+        "total": 17
+      },
+      "p2p": {
+        "passed": 0,
+        "total": 7
+      },
+      "runtime_seconds": 5405,
+      "agent_execution_seconds": 5404,
+      "environment_setup_seconds": 6,
+      "verifier_seconds": 0,
+      "recorded_workflow_cost_usd": 0.0,
+      "comparison_cost_usd": 0.0,
+      "comparison_cost_basis": "aborted_timeout_before_worker_handoff",
+      "tokens": {
+        "input_including_cache": 0,
+        "cache_read": 0,
+        "uncached_input": 0,
+        "output": 0
+      }
+    },
+    {
+      "condition": "k3-solo",
+      "treatment": "solo",
+      "models": {
+        "worker": "kimi-code/k3"
+      },
+      "thinking": "max",
+      "validation": "VALID_MODEL_TIMEOUT",
+      "reward": 1.0,
+      "partial": 1.0,
+      "f2p": {
+        "passed": 17,
+        "total": 17
+      },
+      "p2p": {
+        "passed": 7,
+        "total": 7
+      },
+      "runtime_seconds": 5565,
+      "agent_execution_seconds": 5404,
+      "environment_setup_seconds": 6,
+      "verifier_seconds": 155,
+      "recorded_workflow_cost_usd": 0.0,
+      "comparison_cost_usd": 2.7873,
+      "comparison_cost_basis": "inferred_k3_worker_pricing",
+      "tokens": {
+        "input_including_cache": 4934243,
+        "cache_read": 4733696,
+        "uncached_input": 200547,
+        "output": 51041
+      }
+    }
+  ]
+}

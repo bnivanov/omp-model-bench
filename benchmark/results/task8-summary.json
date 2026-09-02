@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "status": "task_8_complete",
+  "published_at": "2026-09-01",
+  "closed_at": "2026-09-01",
+  "protocol": "v4",
+  "scope": {
+    "task_index": 8,
+    "task_id": "drizzle-orm-window-function-builders",
+    "task_difficulty": "extreme",
+    "language": "typescript",
+    "repository": "drizzle-team/drizzle-orm",
+    "canonical_routes": 4,
+    "statement": "Task 8 evaluation: DS4 solo missed 2 test cases (128/130 F2P). K3 Prewalk + DS4 (130/130 F2P, $0.5466, 19m 33s), K3 Solo (130/130 F2P, $2.4156, 35m 38s), and K3 Plan-YOLO + DS4 (130/130 F2P, $0.6025, 21m 05s) all achieved 100% full recovery. Plan-YOLO matched K3 Solo quality at 75% cost reduction."
+  },
+  "routes": [
+    {
+      "condition": "ds4-solo",
+      "treatment": "solo",
+      "models": {
+        "worker": "deepseek/deepseek-v4-flash"
+      },
+      "thinking": "max",
+      "validation": "VALID",
+      "reward": 0.0,
+      "partial": 0.9971264367816092,
+      "f2p": {
+        "passed": 128,
+        "total": 130
+      },
+      "p2p": {
+        "passed": 566,
+        "total": 566
+      },
+      "runtime_seconds": 1033,
+      "agent_execution_seconds": 980,
+      "environment_setup_seconds": 5,
+      "verifier_seconds": 48,
+      "recorded_workflow_cost_usd": 0.0807412872,
+      "comparison_cost_usd": 0.0807412872,
+      "comparison_cost_basis": "recorded_ds4_gateway_cost",
+      "tokens": {
+        "input_including_cache": 15646813,
+        "cache_read": 15556224,
+        "uncached_input": 90589,
+        "output": 87505
+      }
+    },
+    {
+      "condition": "k3-plan-yolo-ds4",
+      "treatment": "plan_yolo",
+      "models": {
+        "planner": "kimi-code/k3",
+        "worker": "deepseek/deepseek-v4-flash"
+      },
+      "thinking": "max",
+      "validation": "VALID",
+      "reward": 1.0,
+      "partial": 1.0,
+      "f2p": {
+        "passed": 130,
+        "total": 130
+      },
+      "p2p": {
+        "passed": 566,
+        "total": 566
+      },
+      "runtime_seconds": 1265,
+      "agent_execution_seconds": 1205,
+      "environment_setup_seconds": 5,
+      "verifier_seconds": 55,
+      "recorded_workflow_cost_usd": 0.0552477576,
+      "comparison_cost_usd": 0.6025,
+      "comparison_cost_basis": "inferred_k3_planner_plus_recorded_ds4_worker",
+      "tokens": {
+        "input_including_cache": 10720056,
+        "cache_read": 10580480,
+        "uncached_input": 139576,
+        "output": 66470
+      }
+    },
+    {
+      "condition": "k3-prewalk-ds4",
+      "treatment": "prewalk",
+      "models": {
+        "prewalker": "kimi-code/k3",
+        "worker": "deepseek/deepseek-v4-flash"
+      },
+      "thinking": "max",
+      "validation": "VALID",
+      "reward": 1.0,
+      "partial": 1.0,
+      "f2p": {
+        "passed": 130,
+        "total": 130
+      },
+      "p2p": {
+        "passed": 566,
+        "total": 566
+      },
+      "runtime_seconds": 1173,
+      "agent_execution_seconds": 1118,
+      "environment_setup_seconds": 5,
+      "verifier_seconds": 50,
+      "recorded_workflow_cost_usd": 0.0692307896,
+      "comparison_cost_usd": 0.5466,
+      "comparison_cost_basis": "inferred_k3_prewalker_plus_recorded_ds4_worker",
+      "tokens": {
+        "input_including_cache": 14586421,
+        "cache_read": 14448384,
+        "uncached_input": 138037,
+        "output": 73197
+      }
+    },
+    {
+      "condition": "k3-solo",
+      "treatment": "solo",
+      "models": {
+        "worker": "kimi-code/k3"
+      },
+      "thinking": "max",
+      "validation": "VALID",
+      "reward": 1.0,
+      "partial": 1.0,
+      "f2p": {
+        "passed": 130,
+        "total": 130
+      },
+      "p2p": {
+        "passed": 566,
+        "total": 566
+      },
+      "runtime_seconds": 2138,
+      "agent_execution_seconds": 2080,
+      "environment_setup_seconds": 5,
+      "verifier_seconds": 53,
+      "recorded_workflow_cost_usd": 0.0,
+      "comparison_cost_usd": 2.4156,
+      "comparison_cost_basis": "inferred_k3_worker_pricing",
+      "tokens": {
+        "input_including_cache": 4822736,
+        "cache_read": 4726784,
+        "uncached_input": 95952,
+        "output": 47315
+      }
+    }
+  ]
+}

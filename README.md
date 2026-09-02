@@ -1,8 +1,8 @@
 # OMP Model Routing Benchmark
 
-Task 4 DS4 baseline closeout for a bounded OMP × Pier/DeepSWE experiment on where to spend model intelligence in a coding-agent workflow: before implementation, at the mutation boundary, during implementation, after implementation, or on a stronger solo worker.
+Public snapshot of a bounded OMP × Pier/DeepSWE experiment on where to spend model intelligence in a coding-agent workflow: before implementation, at the mutation boundary, during implementation, after implementation, or on a stronger solo worker.
 
-**Status (2026-08-14):** Task 1 is complete. Task 2 DS4 solo is a valid near-miss. Task 3 DS4 solo is a valid ceiling. Task 4 DS4 solo is a valid miss (`20/22` F2P); Task 4 K3 review + one repair regressed to `19/22`. Remaining Task 2, Task 3, and other Task 4 routes are not authorized; the next run is Task 4 K3 solo.
+**Status (2026-09-02):** Tasks 1–6, 8, and 10 have closed aggregate result files on this branch. This repository is the evidence companion for the write-up, not a copy of the article. It contains protocol, harness code, aggregate JSON, and chart assets. It does not contain the article, raw transcripts, hidden tests, or DeepSWE fixtures.
 
 ## Research question
 
@@ -116,15 +116,22 @@ Run it only from a clean committed worktree after the focused tests and local re
 - [`benchmark/scripts/`](benchmark/scripts/) — run, readiness, freeze, and validation tooling
 - [`benchmark/tests/`](benchmark/tests/) — focused harness regression tests
 - [`benchmark/SPECIAL_SAUCE.md`](benchmark/SPECIAL_SAUCE.md) — OMP feature-selection rationale
+- [`benchmark/results/task1-summary.json`](benchmark/results/task1-summary.json) — Task 1 aggregates
 - [`benchmark/results/task2-summary.json`](benchmark/results/task2-summary.json) — Task 2 DS4 baseline aggregates
 - [`benchmark/results/task3-summary.json`](benchmark/results/task3-summary.json) — Task 3 DS4 baseline aggregates
-- [`benchmark/results/task4-summary.json`](benchmark/results/task4-summary.json) — Task 4 DS4 baseline aggregates
-- [`ANNOUNCEMENTS.md`](ANNOUNCEMENTS.md) — ready-to-paste Discord and X drafts
+- [`benchmark/results/task4-summary.json`](benchmark/results/task4-summary.json) — Task 4 DS4 baseline and review aggregates
+- [`benchmark/results/task5-summary.json`](benchmark/results/task5-summary.json) — Task 5 plan-YOLO vs prewalk aggregates
+- [`benchmark/results/task6-summary.json`](benchmark/results/task6-summary.json) — Task 6 plan-YOLO vs prewalk aggregates
+- [`benchmark/results/task8-summary.json`](benchmark/results/task8-summary.json) — Task 8 plan-YOLO vs prewalk aggregates
+- [`benchmark/results/task10-summary.json`](benchmark/results/task10-summary.json) — Task 10 plan-YOLO vs prewalk aggregates
+- [`benchmark/visuals/out/`](benchmark/visuals/out/) — chart assets used by the write-up
+- [`ANNOUNCEMENTS.md`](ANNOUNCEMENTS.md) — older Discord and X drafts
 
 ## Safe-publication scope
 
-This public snapshot contains the approach, orchestration code, focused tests, protocol, aggregate outputs, and reviewed findings. It intentionally excludes:
+This public snapshot contains the approach, orchestration code, focused tests, protocol, aggregate outputs, chart assets, and reviewed findings. It intentionally excludes:
 
+- the article itself;
 - credentials, provider tokens, and local authentication state;
 - raw run transcripts, model session logs, stderr, and provider request metadata;
 - hidden verifier output and per-test failure details;

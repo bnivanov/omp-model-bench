@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "status": "official_task_5_closeout_complete",
+  "published_at": "2026-08-28",
+  "closed_at": "2026-08-31",
+  "protocol": "v4",
+  "scope": {
+    "task_index": 5,
+    "task_id": "kombu-virtual-queue-dead-lettering",
+    "task_difficulty": "extreme",
+    "difficulty_basis": "operator_directed_structural_review_after_k3_findings",
+    "canonical_routes": 4,
+    "statement": "Official Task 5 closeout: DS4 solo valid miss (55/76 F2P), K3 solo valid miss (67/76 F2P), K3 prewalk partial recovery (68/76 F2P, $0.71, 38m 29s), and K3 plan-yolo full ceiling recovery (76/76 F2P, $0.53, 18m 54s). Upfront read-only planning cleanly dominates code-authoring handoffs (prewalk) and standalone execution in quality, speed, and cost."
+  },
+  "operator_decision": {
+    "task_5_evaluation": "closed_complete",
+    "remaining_task_2_routes": "registered_but_unauthorized_review_deferred",
+    "remaining_task_3_routes": "registered_but_unauthorized",
+    "remaining_task_4_routes": "closed",
+    "remaining_task_5_routes": "closed"
+  },
+  "routes": [
+    {
+      "condition": "ds4-solo",
+      "treatment": "solo",
+      "models": {
+        "worker": "deepseek/deepseek-v4-flash"
+      },
+      "thinking": "max",
+      "validation": "VALID",
+      "reward": 0.0,
+      "partial": 0.9858870967741935,
+      "f2p": {
+        "passed": 55,
+        "total": 76
+      },
+      "p2p": {
+        "passed": 1412,
+        "total": 1412
+      },
+      "runtime_seconds": 1335,
+      "agent_execution_seconds": 1259,
+      "environment_setup_seconds": 10,
+      "verifier_seconds": 50,
+      "recorded_workflow_cost_usd": 0.0867863136,
+      "inferred_helper_cost_usd": 0.0,
+      "comparison_cost_usd": 0.0867863136,
+      "comparison_cost_basis": "recorded",
+      "tokens": {
+        "input_including_cache": 13034884,
+        "cache_read": 12954112,
+        "uncached_input": 80772,
+        "output": 140024
+      }
+    },
+    {
+      "condition": "k3-plan-yolo-ds4",
+      "treatment": "plan_yolo",
+      "models": {
+        "planner": "kimi-code/k3",
+        "worker": "deepseek/deepseek-v4-flash"
+      },
+      "thinking": "max",
+      "validation": "VALID",
+      "reward": 1.0,
+      "partial": 1.0,
+      "f2p": {
+        "passed": 76,
+        "total": 76
+      },
+      "p2p": {
+        "passed": 1412,
+        "total": 1412
+      },
+      "runtime_seconds": 1134,
+      "agent_execution_seconds": 1063,
+      "environment_setup_seconds": 5,
+      "verifier_seconds": 49,
+      "recorded_workflow_cost_usd": 0.0422193408,
+      "recorded_planner_cost_usd": 0.0,
+      "inferred_helper_cost_usd": 0.4921992,
+      "comparison_cost_usd": 0.5344185408,
+      "comparison_cost_basis": "recorded_ds4_worker_plus_inferred_k3_list_price",
+      "tokens": {
+        "input_including_cache": 6537937,
+        "cache_read": 6416640,
+        "uncached_input": 121297,
+        "output": 68662
+      }
+    },
+    {
+      "condition": "k3-prewalk-ds4",
+      "treatment": "prewalk",
+      "models": {
+        "prewalker": "kimi-code/k3",
+        "worker": "deepseek/deepseek-v4-flash"
+      },
+      "thinking": "max",
+      "validation": "VALID",
+      "reward": 0.0,
+      "partial": 0.9946236559139785,
+      "f2p": {
+        "passed": 68,
+        "total": 76
+      },
+      "p2p": {
+        "passed": 1412,
+        "total": 1412
+      },
+      "runtime_seconds": 2309,
+      "agent_execution_seconds": 2236,
+      "environment_setup_seconds": 6,
+      "verifier_seconds": 50,
+      "recorded_workflow_cost_usd": 0.0532403256,
+      "recorded_prewalker_cost_usd": 0.0,
+      "inferred_helper_cost_usd": 0.6592422,
+      "comparison_cost_usd": 0.7124825256,
+      "comparison_cost_basis": "recorded_ds4_worker_plus_inferred_k3_list_price",
+      "tokens": {
+        "input_including_cache": 8746782,
+        "cache_read": 8613376,
+        "uncached_input": 133406,
+        "output": 88872
+      }
+    },
+    {
+      "condition": "k3-solo",
+      "treatment": "solo",
+      "models": {
+        "worker": "kimi-code/k3"
+      },
+      "thinking": "max",
+      "validation": "VALID",
+      "reward": 0.0,
+      "partial": 0.9939516129032258,
+      "f2p": {
+        "passed": 67,
+        "total": 76
+      },
+      "p2p": {
+        "passed": 1412,
+        "total": 1412
+      },
+      "runtime_seconds": 1573,
+      "agent_execution_seconds": 1502,
+      "environment_setup_seconds": 5,
+      "verifier_seconds": 49,
+      "recorded_workflow_cost_usd": 0.0,
+      "inferred_helper_cost_usd": 1.8681426,
+      "comparison_cost_usd": 1.8681426,
+      "comparison_cost_basis": "inferred_k3_list_price",
+      "tokens": {
+        "input_including_cache": 3169943,
+        "cache_read": 3084032,
+        "uncached_input": 85911,
+        "output": 45680
+      }
+    }
+  ],
+  "k3_pricing": {
+    "basis": "official_list_price_estimate",
+    "retrieved": "2026-08-12",
+    "cache_miss_input_usd_per_million": 3.0,
+    "cache_hit_input_usd_per_million": 0.3,
+    "output_usd_per_million": 15.0,
+    "note": "K3 roles recorded at $0 by the gateway; pricing estimated from official list price."
+  }
+}
